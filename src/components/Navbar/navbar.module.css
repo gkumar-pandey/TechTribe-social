@@ -1,0 +1,6 @@
+.nav {
+  @apply shadow-lg border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md;
+}
+.logo {
+  @apply text-3xl font-extrabold p-1 text-green-700;
+}

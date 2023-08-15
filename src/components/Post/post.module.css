@@ -1,0 +1,19 @@
+.icon {
+  @apply text-xl cursor-pointer group-hover:text-red-600;
+}
+
+.likedIcon {
+  @apply text-xl cursor-pointer text-red-600;
+}
+
+.post_container {
+  @apply p-4 rounded-md my-1 border shadow-lg bg-white w-full  mx-auto;
+}
+
+.icon_container {
+  @apply flex items-center text-lg cursor-pointer gap-1;
+}
+
+.likeIcon_wrapper {
+  @apply p-2 rounded-full hover:bg-red-200;
+}

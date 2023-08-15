@@ -1,0 +1,15 @@
+.input {
+  @apply px-2 py-1 focus:outline-none border border-gray-700 rounded;
+}
+
+.addPhotoIcon {
+  @apply absolute  text-white cursor-pointer;
+}
+
+.top_layer {
+  @apply absolute inset-0 bg-black opacity-40 cursor-pointer;
+}
+
+.save_btn {
+  @apply py-1 px-4 my-2 w-1/4 rounded bg-green-700 text-white text-lg font-medium;
+}
