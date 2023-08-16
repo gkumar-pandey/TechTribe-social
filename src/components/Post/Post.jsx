@@ -36,8 +36,10 @@ const Post = (props) => {
         </div>
         <div className="w-full">
           <PostTopSection {...props} />
-          <PostContent content={content} />
-          {mediaUrl && <PostMedia mediaUrl={mediaUrl} />}
+          <Link to={`/post/${_id}`}>
+            <PostContent content={content} />
+            {mediaUrl && <PostMedia mediaUrl={mediaUrl} />}
+          </Link>
           <PostIcons
             _id={_id}
             likes={likes}

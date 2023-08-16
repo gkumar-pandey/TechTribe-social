@@ -20,7 +20,7 @@ export const postsInitialState = {
 };
 
 export const PostsReducer = (state, { type, payload }) => {
-  const currUserState = JSON.parse(localStorage.getItem("user")).user;
+  const currUserState = JSON.parse(localStorage.getItem("user"))?.user;
   switch (type) {
     case SET_ALL_POSTS:
       return { ...state, AllPosts: sortPosts(payload, "RECENT") };

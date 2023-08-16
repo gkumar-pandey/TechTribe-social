@@ -1,3 +1,4 @@
 import { useScrollToTop } from "./useScrollToTop";
+import useDebounce from "./useDebounce";
 
-export { useScrollToTop };
+export { useScrollToTop, useDebounce };
