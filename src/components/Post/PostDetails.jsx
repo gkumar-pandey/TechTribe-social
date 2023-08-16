@@ -30,7 +30,7 @@ const PostDetailsLikesSection = ({ likes }) => {
     <>
       <div className="my-2 py-1 border-t border-b text-md font-semibold border-gray-500 ">
         <div>
-          <span>{likes.likeCount}</span>
+          <span>{likes?.likeCount}</span>
           <span>Likes</span>
         </div>
       </div>
@@ -66,32 +66,14 @@ const CommentSection = ({ profileUrl }) => {
   );
 };
 
-const PostDetails = () => {
-  const data = {
-    _id: "7c015944-041b-4c9b-9b3a-48b2ab1f1010",
-    content: "It's not magic, it's talent and sweat",
-    mediaUrl:
-      "https://res.cloudinary.com/dlykup1dh/image/upload/v1687083339/TechTribe/PostsImg/post-6.jpg",
-    username: "ihatedinesh",
-    firstName: "Gilfoyle",
-    lastName: "",
-    userId: "208c99e4-gilfoyle-userId",
-    likes: {
-      likeCount: 6,
-      likedBy: [],
-      dislikedBy: []
-    },
-    profileUrl:
-      "https://res.cloudinary.com/dlykup1dh/image/upload/v1687078552/TechTribe/UsersProfile/gilfoyl.jpg",
-    id: 17
-  };
+const PostDetails = (props) => {
   return (
     <div className="p-4 bg-white ">
-      <PostDetailsTopSection {...data} />
-      <PostContent {...data} />
-      <PostMedia {...data} />
-      <PostDetailsLikesSection {...data} />
-      <PostDetails {...data} />
+      <PostDetailsTopSection {...props} />
+      <PostContent {...props} />
+      {props.mediaUrl && <PostMedia {...props} />}
+
+      <PostDetailsLikesSection {...props} />
     </div>
   );
 };

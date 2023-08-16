@@ -12,11 +12,11 @@ function App() {
     { path: "/", element: <HomePage /> },
     { path: "/login", element: <LoginPage /> },
     { path: "/signup", element: <SignUpPage /> },
-    { path: "/post", element: <HomePage /> },
     { path: "/explore", element: <HomePage /> },
     { path: "/bookmarks", element: <HomePage /> },
     { path: "/profile/:userId", element: <HomePage /> },
-    { path: "/search", element: <HomePage /> }
+    { path: "/search", element: <HomePage /> },
+    { path: "/post/:postId", element: <HomePage /> }
   ];
 
   return (

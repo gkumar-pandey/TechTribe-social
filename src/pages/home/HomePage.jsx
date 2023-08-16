@@ -12,13 +12,14 @@ import { SearchPage } from "../search-page/search-page";
 const HomePage = () => {
   const location = useLocation();
   const { userId } = useParams();
+  const { postId } = useParams();
 
   const isFeedPage = location.pathname === "/";
   const isProfilePage = location.pathname === `/profile/${userId}`;
-  const isPostPage = location.pathname === "/post";
   const isExplorePage = location.pathname === "/explore";
   const isBookmarksPage = location.pathname === "/bookmarks";
   const isSearchPage = location.pathname === "/search";
+  const isPostPage = location.pathname === `/post/${postId}`;
 
   return (
     <div className="bg-slate-50 py-8 min-h-screen ">
