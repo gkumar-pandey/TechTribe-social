@@ -7,6 +7,7 @@ import BookmarkPage from "../bookmark/Bookmark";
 import { Grid, RightSideBar, LeftSideBar, Container } from "../../components";
 import FeedPage from "../feed-page/feed-page";
 import ExplorePage from "../explore-page/explore-page";
+import { SearchPage } from "../search-page/search-page";
 
 const HomePage = () => {
   const location = useLocation();
@@ -17,6 +18,7 @@ const HomePage = () => {
   const isPostPage = location.pathname === "/post";
   const isExplorePage = location.pathname === "/explore";
   const isBookmarksPage = location.pathname === "/bookmarks";
+  const isSearchPage = location.pathname === "/search";
 
   return (
     <div className="bg-slate-50 py-8 min-h-screen ">
@@ -33,6 +35,7 @@ const HomePage = () => {
                 {isPostPage && <PostPage />}
                 {isExplorePage && <ExplorePage />}
                 {isBookmarksPage && <BookmarkPage />}
+                {isSearchPage && <SearchPage />}
               </div>
             </div>
             <div className=" flex  flex-col   items-end md:hidden  ">

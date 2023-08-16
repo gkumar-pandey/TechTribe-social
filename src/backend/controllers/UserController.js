@@ -9,6 +9,23 @@ import { formatDate, requiresAuth } from "../utils/authUtils";
  * This handler handles gets all users in the db.
  * send GET Request at /api/users
  * */
+export const getUserBySearchHandler = function (schema, request) {
+  const searchQuery = request.queryParams?.search.trim();
+
+  if (searchQuery) {
+    const searchedUsers = this.db.users.filter(
+      ({ username, firstName, lastName }) => {
+        const fullName = firstName + " " + lastName;
+        return (
+          username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          fullName.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+    );
+
+    return new Response(200, {}, { users: searchedUsers });
+  }
+};
 
 export const getAllUsersHandler = function () {
   return new Response(200, {}, { users: this.db.users });

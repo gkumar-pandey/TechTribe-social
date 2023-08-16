@@ -15,15 +15,16 @@ function App() {
     { path: "/post", element: <HomePage /> },
     { path: "/explore", element: <HomePage /> },
     { path: "/bookmarks", element: <HomePage /> },
-    { path: "/profile/:userId", element: <HomePage /> }
+    { path: "/profile/:userId", element: <HomePage /> },
+    { path: "/search", element: <HomePage /> }
   ];
 
   return (
     <>
       {!isAuthPage && <Navbar />}
       <Routes>
-        {routes.map(({ path, element }) => (
-          <Route path={path} element={element} />
+        {routes.map(({ path, element }, idx) => (
+          <Route path={path} element={element} key={idx} />
         ))}
       </Routes>
       <Toaster />

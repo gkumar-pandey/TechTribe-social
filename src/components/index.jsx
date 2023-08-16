@@ -22,6 +22,7 @@ import Container from "./Container/Container";
 import { ShimmerPosts } from "./Loader/Loader";
 import PostModalTitle from "./Form/PostForm/component/PostModalTitle";
 import { Loader } from "./Loader/Loader";
+import SearchInput from "./Input/SearchInput";
 
 export {
   LoginForm,
@@ -45,5 +46,6 @@ export {
   Container,
   ShimmerPosts,
   PostModalTitle,
-  Loader
+  Loader,
+  SearchInput
 };

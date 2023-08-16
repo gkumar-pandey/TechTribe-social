@@ -6,6 +6,7 @@ import Avatar from "../Avatar/Avatar";
 import Container from "../Container/Container";
 import styles from "./navbar.module.css";
 import { useAuth } from "../../context";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { currUserState } = useAuth();
@@ -19,13 +20,13 @@ const Navbar = () => {
               <h1>TechTribe</h1>
             </div>
             <div className="flex items-center">
-              <BsFillSunFill className=" text-3xl mx-5 " />
-              <span>
+              {/* <BsFillSunFill className=" text-3xl mx-5 " /> */}
+              <Link to={`/profile/${currUserState?._id}`}>
                 <Avatar
                   image={currUserState?.profileImage}
                   alt={currUserState?.firstName}
                 />
-              </span>
+              </Link>
             </div>
           </div>
         </Container>
