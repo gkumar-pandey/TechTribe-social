@@ -6,6 +6,7 @@ import {
   SET_FEED_POSTS,
   UPDATE_POSTS
 } from "../../reducer/actions/actions";
+import { toast } from "react-hot-toast";
 
 export const getPostsByUserName = (username) => {
   return axios.get(`/api/posts/user/${username}`);
@@ -137,7 +138,13 @@ export const removeFromBookmarksService = async (
   }
 };
 
-export const uploadPostService = async (post, token, dispatchPosts) => {
+export const uploadPostService = async (
+  post,
+  token,
+  dispatchPosts,
+  setIsLoading,
+  closeModal
+) => {
   try {
     const { status, data } = await axios.post(
       `/api/posts`,
@@ -151,9 +158,13 @@ export const uploadPostService = async (post, token, dispatchPosts) => {
 
     if (status) {
       dispatchPosts({ type: SET_ALL_POSTS, payload: data?.posts });
+      setIsLoading(false);
+      closeModal();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error?.message);
+    toast.error(error?.message);
+    setIsLoading(false);
   }
 };
 
@@ -196,6 +207,29 @@ export const editPostService = async (
       dispatchPosts({ type: SET_FEED_POSTS, payload: data?.posts });
       dispatchPosts({ type: UPDATE_POSTS, payload: data?.posts });
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Upload images to cloudinary
+
+export const uploadToCloudinary = async (file) => {
+  const data = new FormData();
+  data.append("file", file);
+  data.append("upload_preset", "techtribe");
+  data.append("cloud_name", "dlykup1dh");
+  try {
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dlykup1dh/auto/upload",
+      {
+        method: "POST",
+        body: data
+      }
+    );
+    const resData = await res.json();
+
+    return resData?.url;
   } catch (error) {
     console.log(error);
   }

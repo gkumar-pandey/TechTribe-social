@@ -111,7 +111,7 @@ const LeftSideBar = () => {
           isOpen={openPostFormModal}
           onClose={togglePostBtn}
         >
-          <PostForm />
+          <PostForm closeModal={togglePostBtn} />
         </Modal>
       </div>
     </>

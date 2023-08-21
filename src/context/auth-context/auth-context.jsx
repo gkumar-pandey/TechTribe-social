@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }) => {
     CurrUserReducer,
     CurrUserInitialState
   );
+  const [token, setToken] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -77,6 +78,7 @@ export const AuthProvider = ({ children }) => {
     if (localStorage.getItem("user")) {
       const { user, token } = JSON.parse(localStorage.getItem("user"));
       dispatchCurrUser({ type: SET_CURR_USER, payload: user });
+      setToken(token);
     } else {
       navigate("/login");
     }
@@ -95,7 +97,8 @@ export const AuthProvider = ({ children }) => {
         setIsLoading,
         logoutHandler,
         currUserState,
-        dispatchCurrUser
+        dispatchCurrUser,
+        token
       }}
     >
       {children}

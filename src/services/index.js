@@ -18,7 +18,8 @@ import {
   removeFromBookmarksService,
   uploadPostService,
   deleteUserPostService,
-  editPostService
+  editPostService,
+  uploadToCloudinary
 } from "./post-service/post-service";
 
 export {

@@ -7,7 +7,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Loader } from "../../Loader/Loader";
 import Modal from "../../Modal/Modal";
-import PostForm from "../../Form/PostForm/PostForm";
 import EditPostFrom from "../../Form/PostForm/EditPostFrom";
 import PostModalTitle from "../../Form/PostForm/component/PostModalTitle";
 
@@ -32,10 +31,10 @@ const PostTopSection = (props) => {
 
   return (
     <>
-      <div className="flex items-center justify-between w-full ">
+      <div className="flex items-center justify-between w-full">
         <span>
           <Link to={`/profile/${userId}`}>
-            <span className=" font-semibold text-lg hover:underline ">
+            <span className=" font-semibold text-lg hover:underline">
               {firstName + " " + lastName}
             </span>
           </Link>
