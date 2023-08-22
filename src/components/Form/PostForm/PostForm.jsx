@@ -9,6 +9,8 @@ import {
   PostTextArea,
   UploadPhotoBtn
 } from "./component";
+import EmojiPicker from "emoji-picker-react";
+import Emoji from "../../Emoji/Emoji";
 
 const PostForm = ({ closeModal }) => {
   const {
@@ -21,6 +23,7 @@ const PostForm = ({ closeModal }) => {
     content: "",
     mediaUrl: ""
   });
+  const [selectEmoji, setSelectEmoji] = useState(false);
   const { dispatchPosts } = usePosts();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -74,11 +77,18 @@ const PostForm = ({ closeModal }) => {
     const value = e.target.value;
     setPostFormData((pre) => ({ ...pre, [name]: value }));
   };
+  const emojiSelectHandler = (e) => {
+    console.log(e.emoji);
+    setPostFormData((pre) => ({
+      ...pre,
+      content: postFormData.content + e.emoji
+    }));
+  };
+
+  console.log(postFormData.content);
 
   const isPostBtnDisable =
     postFormData.content === "" && postFormData.mediaUrl === "";
-
-  console.log(isPostBtnDisable);
 
   const uploadPostImage = async (e) => {
     e.preventDefault();
@@ -98,6 +108,7 @@ const PostForm = ({ closeModal }) => {
       <div>
         <form onSubmit={postBtnHandler} className="p-4">
           <PostTextArea
+            value={postFormData?.content}
             onChangeHandler={onChangeHandler}
             mediaUrl={postFormData?.mediaUrl}
           />
@@ -112,8 +123,14 @@ const PostForm = ({ closeModal }) => {
           <div className="flex items-center justify-between py-2">
             <div>
               <div className="flex  items-center gap-4 my-1 ">
-                <EmojiBtn />
+                <EmojiBtn onClick={() => setSelectEmoji(!selectEmoji)} />
                 <UploadPhotoBtn uploadPostImage={uploadPostImage} />
+                {selectEmoji && (
+                  <Emoji
+                    onClose={() => setSelectEmoji(!selectEmoji)}
+                    emojiSelectHandler={emojiSelectHandler}
+                  />
+                )}
               </div>
             </div>
             <div className="flex items-center flow-row gap-3">
