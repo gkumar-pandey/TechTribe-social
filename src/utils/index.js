@@ -2,6 +2,6 @@ import {
   signupValidation,
   loginValidation
 } from "./authvalidation/AuthValidation";
-import { sortPosts } from "./filters/filters";
+import { sortPosts, isFollowing } from "./filters/filters";
 
-export { signupValidation, loginValidation, sortPosts };
+export { signupValidation, loginValidation, sortPosts, isFollowing };

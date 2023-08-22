@@ -1,3 +1,4 @@
+import { isFollowing } from "../../utils";
 import {
   SET_CURR_USER,
   SET_SUGGESTED_USER,
@@ -8,7 +9,7 @@ export const UsersInitialState = {
   users: [],
   suggestedUsers: []
 };
-
+const currUser = JSON.parse(localStorage.getItem("user"))?.user;
 export const CurrUserInitialState = {};
 
 export const UsersReducer = (state, { type, payload }) => {
@@ -18,7 +19,13 @@ export const UsersReducer = (state, { type, payload }) => {
     case SET_SUGGESTED_USER:
       return {
         ...state,
-        suggestedUsers: payload.slice(0, 6)
+        suggestedUsers: payload
+          .filter(
+            (item) =>
+              item._id !== currUser._id &&
+              !isFollowing(currUser.following, item._id)
+          )
+          .slice(0, 6)
       };
     default:
       return state;
