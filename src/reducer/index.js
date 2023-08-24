@@ -2,16 +2,14 @@ import {
   signupReducer,
   loginReducer,
   loginInitialState,
-  signupInitialState
+  signupInitialState,
+  currUserReducer
 } from "./auth-reducer/auth-reducer";
 import {
   postsInitialState,
   PostsReducer
 } from "./post-reducer/post-reducer.jsx";
-import {
-  CurrUserReducer,
-  CurrUserInitialState
-} from "./user-reducer/user-reducer";
+import { userInitialState, userReducer } from "./user-reducer/user-reducer";
 
 export {
   signupReducer,
@@ -19,5 +17,10 @@ export {
   loginInitialState,
   signupInitialState,
   postsInitialState,
-  PostsReducer
+  PostsReducer,
+  userInitialState,
+  userReducer,
+  currUserReducer
 };
+
+export * from "./actions/actions";

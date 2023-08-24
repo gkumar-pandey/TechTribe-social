@@ -7,6 +7,7 @@ import PostIcons from "./components/PostIcons";
 import PostMedia from "./components/PostMedia";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context";
+import { isLikedByCurrUser } from "../../utils";
 
 const Post = (props) => {
   const {
@@ -22,9 +23,9 @@ const Post = (props) => {
     comments
   } = props;
   const { likedBy } = likes;
-  const { currUserState } = useAuth();
+  const { currUser } = useAuth();
 
-  const isLikedByUser = likedBy?.find((ele) => ele?._id === currUserState._id);
+  const isLiked = isLikedByCurrUser(likedBy, currUser?._id);
 
   return (
     <div className={styles.post_container}>
@@ -44,7 +45,7 @@ const Post = (props) => {
             _id={_id}
             likes={likes}
             comments={comments}
-            isLikedByUser={isLikedByUser}
+            isLikedByUser={isLiked}
           />
         </div>
       </div>

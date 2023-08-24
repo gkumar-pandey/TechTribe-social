@@ -16,7 +16,7 @@ export const userFollowingPosts = (data, user) => {
 };
 
 export const isFollowing = (data, id) => {
-  const isAvailable = data.find((ele) => ele._id === id);
+  const isAvailable = data?.find((ele) => ele._id === id);
   if (isAvailable) {
     return true;
   } else {

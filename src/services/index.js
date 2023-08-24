@@ -1,11 +1,11 @@
 import { loginService, signupService } from "./auth-service/auth-service";
 
 import {
-  getAllUsers,
+  getAllUsersService,
   updateUserProfile,
   getUsersDetailsByUsername,
-  followUserService,
-  UnfollowUserService
+  followService,
+  unfollowService
 } from "./user-service/user-service";
 
 import {
@@ -26,7 +26,7 @@ export {
   loginService,
   signupService,
   getPostsByUserName,
-  getAllUsers,
+  getAllUsersService,
   updateUserProfile,
   getUsersDetailsByUsername,
   likePostService,
@@ -36,8 +36,8 @@ export {
   getBookmarksService,
   removeFromBookmarksService,
   uploadPostService,
-  followUserService,
-  UnfollowUserService,
+  followService,
+  unfollowService,
   deleteUserPostService,
   editPostService
 };

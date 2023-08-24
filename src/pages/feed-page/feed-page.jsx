@@ -13,7 +13,7 @@ import { useAuth, usePosts } from "../../context";
 import { useScrollToTop } from "../../hooks";
 
 const FeedPage = () => {
-  const { currUserState } = useAuth();
+  const { currUser } = useAuth();
   const [postFormModalOpen, setPostFormModal] = useState(false);
   const { posts, feedPosts } = usePosts();
   useScrollToTop();
@@ -34,10 +34,7 @@ const FeedPage = () => {
 
   return (
     <div>
-      <FeedPostBtn
-        user={currUserState}
-        togglePostFormModal={togglePostFormModal}
-      />
+      <FeedPostBtn user={currUser} togglePostFormModal={togglePostFormModal} />
       <SortComp />
       <div>{renderPosts()}</div>
       <Modal

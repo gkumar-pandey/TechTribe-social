@@ -9,14 +9,8 @@ import { loginValidation, signupValidation } from "../../utils";
 import { loginService, signupService } from "../../services";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import {
-  CurrUserInitialState,
-  CurrUserReducer
-} from "../../reducer/user-reducer/user-reducer";
-import { RESET, SET_CURR_USER } from "../../reducer/actions/actions";
 
 const { createContext } = require("react");
-
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -28,12 +22,9 @@ export const AuthProvider = ({ children }) => {
     loginReducer,
     loginInitialState
   );
-  const [currUserState, dispatchCurrUser] = useReducer(
-    CurrUserReducer,
-    CurrUserInitialState
-  );
-  const [token, setToken] = useState(null);
 
+  const [currUser, setCurrUser] = useState("");
+  const [token, setToken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -42,12 +33,7 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     const isValid = signupValidation(signupFormData, dispatchSignUpForm);
     if (isValid) {
-      await signupService(
-        signupFormData,
-        navigate,
-        setIsLoading,
-        dispatchCurrUser
-      );
+      await signupService(signupFormData, navigate, setIsLoading, setCurrUser);
     }
   };
 
@@ -60,7 +46,7 @@ export const AuthProvider = ({ children }) => {
       await loginService(
         loginFormData,
         dispatchLoginForm,
-        dispatchCurrUser,
+        setCurrUser,
         setIsLoading,
         navigate
       );
@@ -69,7 +55,7 @@ export const AuthProvider = ({ children }) => {
 
   const logoutHandler = () => {
     localStorage.clear();
-    dispatchCurrUser({ type: RESET });
+    setCurrUser("");
     navigate("/login");
     toast.success("Logout successfully");
   };
@@ -77,11 +63,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (localStorage.getItem("user")) {
       const { user, token } = JSON.parse(localStorage.getItem("user"));
-      dispatchCurrUser({ type: SET_CURR_USER, payload: user });
+      setCurrUser(user);
       setToken(token);
     } else {
       navigate("/login");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -96,8 +83,8 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         setIsLoading,
         logoutHandler,
-        currUserState,
-        dispatchCurrUser,
+        currUser,
+        setCurrUser,
         token
       }}
     >

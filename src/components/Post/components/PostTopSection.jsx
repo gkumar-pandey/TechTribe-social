@@ -14,10 +14,10 @@ const PostTopSection = (props) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [showEditPostModal, setShowEditPostModal] = useState(false);
   const [isLoadingDeletePost, setIsLoadingDeletePost] = useState(false);
-  const { currUserState } = useAuth();
+  const { currUser } = useAuth();
   const { deleteUserPost } = usePosts();
   const { firstName, lastName, username, userId, _id } = props;
-  const isAuthorizedUser = currUserState._id === userId;
+  const isAuthorizedUser = currUser?._id === userId;
 
   const deleteBtnHandler = async () => {
     setIsLoadingDeletePost(true);

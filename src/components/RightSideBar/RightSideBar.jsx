@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProfileTile from "../Profile/ProfileTile/ProfileTile";
 import { ShimmerProfileTile } from "../Loader/Loader";
 import { useUsers } from "../../context";
@@ -9,8 +9,13 @@ const ProfileLoader = () => {
 
 const RightSideBar = () => {
   const {
-    usersState: { suggestedUsers }
+    user: { suggestedUsers },
+    getAllUsers
   } = useUsers();
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
 
   return (
     <div className=" sm:hidden flex flex-col items-center  w-full xl:w-5/6 sticky top-24 border rounded-md shadow-md bg-white py-4 ">
