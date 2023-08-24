@@ -9,12 +9,11 @@ import {
   PostTextArea,
   UploadPhotoBtn
 } from "./component";
-import EmojiPicker from "emoji-picker-react";
 import Emoji from "../../Emoji/Emoji";
 
 const PostForm = ({ closeModal }) => {
   const {
-    currUserState: { username, firstName, lastName, profileImage, _id },
+    currUser: { username, firstName, lastName, profileImage, _id },
     token
   } = useAuth();
 
@@ -84,8 +83,6 @@ const PostForm = ({ closeModal }) => {
       content: postFormData.content + e.emoji
     }));
   };
-
-  console.log(postFormData.content);
 
   const isPostBtnDisable =
     postFormData.content === "" && postFormData.mediaUrl === "";

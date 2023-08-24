@@ -6,7 +6,7 @@ import UpdateProfileAndCover from "./component/UpdateProfileAndCover";
 import styles from "./editform.module.css";
 
 const EditProfile = ({ editProfileModalHandler }) => {
-  const { currUserState, dispatchCurrUser } = useAuth();
+  const { currUser, setCurrUser } = useAuth();
   const { setOtherUser } = useUsers();
   const [isUploading, setIsUploading] = useState(false);
   const [editData, setEditData] = useState({
@@ -17,7 +17,7 @@ const EditProfile = ({ editProfileModalHandler }) => {
   });
 
   useEffect(() => {
-    setEditData(currUserState);
+    setEditData(currUser);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -67,7 +67,7 @@ const EditProfile = ({ editProfileModalHandler }) => {
     await updateUserProfile(
       editData,
       token,
-      dispatchCurrUser,
+      setCurrUser,
       setOtherUser,
       setIsUploading,
       editProfileModalHandler

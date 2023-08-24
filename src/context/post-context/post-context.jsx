@@ -25,8 +25,7 @@ export const PostsContextProvider = ({ children }) => {
     sortBy: "RECENT",
     search: ""
   });
-  const { currUserState } = useAuth();
-  const token = JSON.parse(localStorage.getItem("user"))?.token;
+  const { currUser, token } = useAuth();
 
   const filtersHandler = (e) => {
     const name = e.target.name;
@@ -62,7 +61,8 @@ export const PostsContextProvider = ({ children }) => {
     if (token) {
       fetchAllPosts();
     }
-  }, [currUserState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currUser]);
 
   const filterFeedPosts = () => {
     let postData = [...posts?.FeedPosts];

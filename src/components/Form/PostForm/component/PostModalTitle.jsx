@@ -4,7 +4,7 @@ import { useAuth } from "../../../../context";
 
 const PostModalTitle = () => {
   const {
-    currUserState: { firstName, lastName, profileImage, username }
+    currUser: { firstName, lastName, profileImage, username }
   } = useAuth();
   return (
     <>

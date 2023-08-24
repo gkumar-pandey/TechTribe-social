@@ -1,10 +1,6 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import {
-  SET_CURR_USER,
-  SET_OTHER_USER,
-  UPDATE_OTHER_USER
-} from "../../reducer/actions/actions";
+import { SET_OTHER_USER } from "../../reducer/actions/actions";
 
 export const getAllUsersService = async () => {
   return await axios.get(`/api/users`);
@@ -56,7 +52,7 @@ export const unfollowService = async (followUserId, token) => {
 export const updateUserProfile = async (
   userData,
   token,
-  dispatchCurrUser,
+  setCurrUser,
   setOtherUser,
   setIsUploading,
   editProfileModalHandler
@@ -73,7 +69,7 @@ export const updateUserProfile = async (
       }
     );
     if (res?.status === 201) {
-      dispatchCurrUser({ type: SET_CURR_USER, payload: res?.data?.user });
+      setCurrUser(res?.data?.user);
       setOtherUser(res?.data?.user);
       toast.success("profile updated successfully");
       setIsUploading(false);
