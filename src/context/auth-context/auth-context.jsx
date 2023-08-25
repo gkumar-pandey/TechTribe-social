@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
         if (status === 200) {
           const { foundUser, encodedToken } = data;
           setCurrUser(foundUser);
+          setToken(encodedToken);
           localStorage.setItem("user", JSON.stringify(foundUser));
           localStorage.setItem("token", encodedToken);
           setIsLoading(false);
