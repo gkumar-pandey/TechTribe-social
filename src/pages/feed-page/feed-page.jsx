@@ -23,7 +23,7 @@ const FeedPage = () => {
   };
 
   const renderPosts = () => {
-    if (!posts?.FeedPosts?.length) {
+    if (!posts?.feed?.length) {
       return [...Array(6)].map((_, idx) => <PostsShimmerLoader key={idx} />);
     }
 

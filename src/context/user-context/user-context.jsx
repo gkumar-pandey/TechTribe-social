@@ -15,7 +15,7 @@ const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
   const [user, dispatchUser] = useReducer(userReducer, userInitialState);
-  const { setCurrUser, currUser, token } = useAuth();
+  const { setCurrUser, token } = useAuth();
 
   const getAllUsers = async () => {
     try {

@@ -55,7 +55,10 @@ const PostTopSection = (props) => {
               } `}
             >
               <button
-                onClick={editPostBtnHandler}
+                onClick={() => {
+                  editPostBtnHandler();
+                  setShowDropDown(!showDropDown);
+                }}
                 className="px-3 py-1 font-medium gap-1 flex flex-row items-center text-green-600 cursor-pointer  hover:bg-green-100 rounded-md text-base w-28  "
               >
                 <EditIcon /> Edit

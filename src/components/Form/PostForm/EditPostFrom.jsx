@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
+import { toast } from "react-hot-toast";
 import { editPostService } from "../../../services";
-import { usePosts } from "../../../context";
+import { useAuth, usePosts } from "../../../context";
 import { Loader } from "../../Loader/Loader";
+import { UPDATE_POST } from "../../../reducer";
 
 const EditPostFrom = ({ _id, content, mediaUrl }) => {
   const [formData, setFormData] = useState({ _id: _id, content: content });
   const [isUpdating, setIsUpdating] = useState(false);
-  const { token, dispatchPosts } = usePosts();
+  const { dispatchPosts } = usePosts();
+  const { token } = useAuth();
 
   const onChangeHandler = (e) => {
     const value = e.target.value;
@@ -19,8 +22,17 @@ const EditPostFrom = ({ _id, content, mediaUrl }) => {
   const updateBtnHandler = async (e) => {
     e.preventDefault();
     setIsUpdating(true);
-    await editPostService(_id, token, formData, dispatchPosts);
-    setIsUpdating(false);
+    try {
+      const { data, status } = await editPostService(_id, token, formData);
+
+      if (status === 201) {
+        dispatchPosts({ type: UPDATE_POST, payload: data?.posts });
+        setIsUpdating(false);
+      }
+    } catch (error) {
+      console.error(error.message);
+      toast.error(error.message);
+    }
   };
 
   return (

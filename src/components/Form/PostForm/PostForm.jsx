@@ -10,6 +10,8 @@ import {
   UploadPhotoBtn
 } from "./component";
 import Emoji from "../../Emoji/Emoji";
+import { toast } from "react-hot-toast";
+import { ADD_NEW_POST } from "../../../reducer";
 
 const PostForm = ({ closeModal }) => {
   const {
@@ -33,21 +35,30 @@ const PostForm = ({ closeModal }) => {
     if (selectedFile) {
       mediaUrl = await uploadToCloudinary(selectedFile);
     }
-    await uploadPostService(
-      {
-        ...postFormData,
-        mediaUrl: mediaUrl,
-        userId: _id,
-        username,
-        firstName,
-        lastName,
-        profileImage
-      },
-      token,
-      dispatchPosts,
-      setIsLoading,
-      closeModal
-    );
+    try {
+      const { data, status } = await uploadPostService(
+        {
+          ...postFormData,
+          mediaUrl: mediaUrl,
+          userId: _id,
+          username,
+          firstName,
+          lastName,
+          profileImage
+        },
+        token
+      );
+
+      if (status === 201) {
+        dispatchPosts({ type: ADD_NEW_POST, payload: data.posts });
+        setIsLoading(false);
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+      setIsLoading(false);
+    }
   };
 
   const uploadToCloudinary = async (file) => {

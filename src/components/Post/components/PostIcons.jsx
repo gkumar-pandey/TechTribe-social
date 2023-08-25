@@ -77,10 +77,10 @@ const BookmarkIconComp = ({ postId }) => {
   const {
     bookmarkPost,
     removeBookmarkPost,
-    posts: { BookmarksPosts }
+    posts: { bookmarks }
   } = usePosts();
 
-  const isBookmarked = BookmarksPosts.find((ele) => ele._id === postId);
+  const isBookmarked = bookmarks.find((ele) => ele._id === postId);
 
   const bookmarkBtnHandler = () => {
     if (isBookmarked) {

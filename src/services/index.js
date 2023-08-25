@@ -10,16 +10,15 @@ import {
 
 import {
   getPostsByUserName,
-  getAllPosts,
-  likePostService,
-  dislikePostService,
+  getAllPostsService,
+  likeService,
+  dislikeService,
   bookmarkService,
   getBookmarksService,
-  removeFromBookmarksService,
+  removeBookmarksService,
   uploadPostService,
-  deleteUserPostService,
-  editPostService,
-  uploadToCloudinary
+  deletePostService,
+  editPostService
 } from "./post-service/post-service";
 
 export {
@@ -29,15 +28,15 @@ export {
   getAllUsersService,
   updateUserProfile,
   getUsersDetailsByUsername,
-  likePostService,
-  getAllPosts,
-  dislikePostService,
+  likeService,
+  dislikeService,
+  getAllPostsService,
   bookmarkService,
   getBookmarksService,
-  removeFromBookmarksService,
+  removeBookmarksService,
   uploadPostService,
   followService,
   unfollowService,
-  deleteUserPostService,
+  deletePostService,
   editPostService
 };
