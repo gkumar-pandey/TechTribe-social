@@ -1,11 +1,11 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { RESET_FORM, SET_CURR_USER } from "../../reducer/actions/actions";
+import { RESET_FORM } from "../../reducer/actions/actions";
 
 export const loginService = async (
   loginFormData,
   dispatchLoginForm,
-  dispatchCurrUser,
+  setCurrUser,
   setIsLoading,
   navigate
 ) => {
@@ -24,8 +24,7 @@ export const loginService = async (
         "user",
         JSON.stringify({ user: data.foundUser, token: data.encodedToken })
       );
-
-      dispatchCurrUser({ type: SET_CURR_USER, payload: data?.foundUser });
+      setCurrUser(data?.foundUser);
       dispatchLoginForm({ type: RESET_FORM });
       setIsLoading(false);
       toast.success("Login successfully");
@@ -43,7 +42,7 @@ export const signupService = async (
   signupFormData,
   navigate,
   setIsLoading,
-  dispatchCurrUser
+  setCurrUser
 ) => {
   setIsLoading(true);
   try {
@@ -58,7 +57,7 @@ export const signupService = async (
 
     if (status === 201) {
       const { createdUser, encodedToken } = data;
-      dispatchCurrUser({ type: SET_CURR_USER, payload: createdUser });
+      setCurrUser(createdUser);
       setIsLoading(false);
       toast.success("Signup successfully");
 
