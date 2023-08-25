@@ -7,11 +7,10 @@ export const sortPosts = (data, sortBy) => {
 };
 
 export const userFollowingPosts = (data, user) => {
-  const { _id, following } = user;
-
   return data?.filter(
     (post) =>
-      post.userId === _id || following.some((ele) => ele._id === post.userId)
+      post.userId === user?._id ||
+      user?.following.some((ele) => ele._id === post.userId)
   );
 };
 

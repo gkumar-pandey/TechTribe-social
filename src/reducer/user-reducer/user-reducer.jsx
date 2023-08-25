@@ -21,8 +21,8 @@ export const userReducer = (state, { type, payload }) => {
         suggestedUsers: payload
           .filter(
             (item) =>
-              item._id !== currUser._id &&
-              !isFollowing(currUser.following, item._id)
+              item?._id !== currUser?._id &&
+              !isFollowing(currUser?.following, item?._id)
           )
           .slice(0, 6)
       };
