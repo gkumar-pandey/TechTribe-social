@@ -17,11 +17,9 @@ const FollowBtn = ({ onClickHandler, isFollowingCurrUser }) => {
 };
 
 const ProfileTile = ({ profileImage, firstName, lastName, username, _id }) => {
-  const {
-    currUser: { following }
-  } = useAuth();
+  const { currUser } = useAuth();
   const { followHandler, unfollowHandler } = useUsers();
-  const isFollowingCurrUser = isFollowing(following, _id);
+  const isFollowingCurrUser = isFollowing(currUser?.following, _id);
   const onClickHandler = () => {
     if (isFollowingCurrUser) {
       unfollowHandler(_id);

@@ -22,7 +22,7 @@ export const postsInitialState = {
 };
 
 export const PostsReducer = (state, { type, payload }) => {
-  const currUser = JSON.parse(localStorage.getItem("user"))?.user;
+  const currUser = JSON.parse(localStorage.getItem("user"));
   const updatedOtherUserPosts = payload.filter((ele) =>
     state.otherUserPosts.find(({ _id }) => _id === ele._id)
   );

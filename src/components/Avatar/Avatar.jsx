@@ -2,18 +2,20 @@ import React from "react";
 import styles from "./avatar.module.css";
 
 const Avatar = ({ image, alt, size }) => {
+  let avatarSizeClass = styles.sm;
+
   if (size === "xl") {
-    return (
-      <img className={`${styles.avatar} ${styles.xl} `} src={image} alt={alt} />
-    );
+    avatarSizeClass = styles.xl;
+  } else if (size === "md") {
+    avatarSizeClass = styles.md;
   }
-  if (size === "md") {
-    return (
-      <img className={`${styles.avatar} ${styles.md}`} src={image} alt={alt} />
-    );
-  }
+
   return (
-    <img className={`${styles.avatar} ${styles.sm}`} src={image} alt={alt} />
+    <img
+      className={`${styles.avatar} ${avatarSizeClass}`}
+      src={image}
+      alt={alt}
+    />
   );
 };
 

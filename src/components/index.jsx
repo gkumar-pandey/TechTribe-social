@@ -24,6 +24,7 @@ import PostModalTitle from "./Form/PostForm/component/PostModalTitle";
 import { Loader } from "./Loader/Loader";
 import SearchInput from "./Input/SearchInput";
 
+import RequireAuth from "./RequireAuth/RequireAuth";
 export {
   LoginForm,
   SignUpForm,
@@ -47,5 +48,6 @@ export {
   ShimmerPosts,
   PostModalTitle,
   Loader,
-  SearchInput
+  SearchInput,
+  RequireAuth
 };

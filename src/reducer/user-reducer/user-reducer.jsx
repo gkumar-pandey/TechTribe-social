@@ -11,7 +11,7 @@ export const userInitialState = {
   suggestedUsers: []
 };
 
-const currUser = JSON.parse(localStorage.getItem("user"))?.user;
+const currUser = JSON.parse(localStorage.getItem("user"));
 
 export const userReducer = (state, { type, payload }) => {
   switch (type) {
