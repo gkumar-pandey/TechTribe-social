@@ -24,8 +24,9 @@ export const AuthProvider = ({ children }) => {
   );
 
   const [currUser, setCurrUser] = useState("");
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [isLoading, setIsLoading] = useState(false);
+  const isLoggedIn = token;
 
   const navigate = useNavigate();
 
@@ -40,16 +41,22 @@ export const AuthProvider = ({ children }) => {
   const loginHandler = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
     const isValid = loginValidation(loginFormData, dispatchLoginForm);
     if (isValid) {
-      await loginService(
-        loginFormData,
-        dispatchLoginForm,
-        setCurrUser,
-        setIsLoading,
-        navigate
-      );
+      try {
+        const { data, status } = await loginService(loginFormData);
+        if (status === 200) {
+          const { foundUser, encodedToken } = data;
+          setCurrUser(foundUser);
+          localStorage.setItem("user", JSON.stringify(foundUser));
+          localStorage.setItem("token", encodedToken);
+          setIsLoading(false);
+          navigate("/");
+        }
+      } catch (error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
   };
 
@@ -61,12 +68,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      const { user, token } = JSON.parse(localStorage.getItem("user"));
+    if (token) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const token = localStorage.getItem("token");
       setCurrUser(user);
       setToken(token);
-    } else {
-      navigate("/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -85,7 +91,8 @@ export const AuthProvider = ({ children }) => {
         logoutHandler,
         currUser,
         setCurrUser,
-        token
+        token,
+        isLoggedIn
       }}
     >
       {children}

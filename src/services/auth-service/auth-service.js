@@ -2,39 +2,13 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { RESET_FORM } from "../../reducer/actions/actions";
 
-export const loginService = async (
-  loginFormData,
-  dispatchLoginForm,
-  setCurrUser,
-  setIsLoading,
-  navigate
-) => {
-  const { username, password } = loginFormData;
-
-  try {
-    const { status, data } = await axios.post(
-      "/api/auth/login",
-      JSON.stringify({
-        username,
-        password
-      })
-    );
-    if (status === 200) {
-      localStorage.setItem(
-        "user",
-        JSON.stringify({ user: data.foundUser, token: data.encodedToken })
-      );
-      setCurrUser(data?.foundUser);
-      dispatchLoginForm({ type: RESET_FORM });
-      setIsLoading(false);
-      toast.success("Login successfully");
-      navigate("/");
-    }
-  } catch (error) {
-    console.error(error?.message);
-    setIsLoading(false);
-    toast.error(error?.message);
-  }
+export const loginService = async (loginFormData) => {
+  return await axios.post(
+    "/api/auth/login",
+    JSON.stringify({
+      ...loginFormData
+    })
+  );
 };
 
 // * Signup service function

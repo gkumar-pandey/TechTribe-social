@@ -10,7 +10,7 @@ export const userFollowingPosts = (data, user) => {
   return data?.filter(
     (post) =>
       post.userId === user?._id ||
-      user?.following.some((ele) => ele._id === post.userId)
+      user?.following?.some((ele) => ele._id === post.userId)
   );
 };
 
