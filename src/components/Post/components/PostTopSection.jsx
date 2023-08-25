@@ -7,7 +7,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Loader } from "../../Loader/Loader";
 import Modal from "../../Modal/Modal";
-import PostForm from "../../Form/PostForm/PostForm";
 import EditPostFrom from "../../Form/PostForm/EditPostFrom";
 import PostModalTitle from "../../Form/PostForm/component/PostModalTitle";
 
@@ -15,10 +14,10 @@ const PostTopSection = (props) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [showEditPostModal, setShowEditPostModal] = useState(false);
   const [isLoadingDeletePost, setIsLoadingDeletePost] = useState(false);
-  const { currUserState } = useAuth();
+  const { currUser } = useAuth();
   const { deleteUserPost } = usePosts();
   const { firstName, lastName, username, userId, _id } = props;
-  const isAuthorizedUser = currUserState._id === userId;
+  const isAuthorizedUser = currUser?._id === userId;
 
   const deleteBtnHandler = async () => {
     setIsLoadingDeletePost(true);
@@ -32,10 +31,10 @@ const PostTopSection = (props) => {
 
   return (
     <>
-      <div className="flex items-center justify-between w-full ">
+      <div className="flex items-center justify-between w-full">
         <span>
           <Link to={`/profile/${userId}`}>
-            <span className=" font-semibold text-lg hover:underline ">
+            <span className=" font-semibold text-lg hover:underline">
               {firstName + " " + lastName}
             </span>
           </Link>
@@ -56,7 +55,10 @@ const PostTopSection = (props) => {
               } `}
             >
               <button
-                onClick={editPostBtnHandler}
+                onClick={() => {
+                  editPostBtnHandler();
+                  setShowDropDown(!showDropDown);
+                }}
                 className="px-3 py-1 font-medium gap-1 flex flex-row items-center text-green-600 cursor-pointer  hover:bg-green-100 rounded-md text-base w-28  "
               >
                 <EditIcon /> Edit

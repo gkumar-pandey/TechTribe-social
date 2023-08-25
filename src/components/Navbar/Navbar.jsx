@@ -9,7 +9,7 @@ import { useAuth } from "../../context";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { currUserState } = useAuth();
+  const { currUser } = useAuth();
 
   return (
     <>
@@ -20,11 +20,11 @@ const Navbar = () => {
               <h1>TechTribe</h1>
             </div>
             <div className="flex items-center">
-              {/* <BsFillSunFill className=" text-3xl mx-5 " /> */}
-              <Link to={`/profile/${currUserState?._id}`}>
+              <BsFillSunFill className=" text-3xl mx-5 " />
+              <Link to={`/profile/${currUser?._id}`}>
                 <Avatar
-                  image={currUserState?.profileImage}
-                  alt={currUserState?.firstName}
+                  image={currUser?.profileImage}
+                  alt={currUser?.firstName}
                 />
               </Link>
             </div>

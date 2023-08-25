@@ -14,3 +14,12 @@ export const userFollowingPosts = (data, user) => {
       post.userId === _id || following.some((ele) => ele._id === post.userId)
   );
 };
+
+export const isFollowing = (data, id) => {
+  const isAvailable = data?.find((ele) => ele._id === id);
+  if (isAvailable) {
+    return true;
+  } else {
+    return false;
+  }
+};

@@ -10,7 +10,7 @@ import {
   ProfileDetailsShimmer,
   ShimmerPosts
 } from "../../components";
-import { usePosts, useUsers } from "../../context";
+import { useAuth, usePosts, useUsers } from "../../context";
 import { useScrollToTop } from "../../hooks";
 import { getPostsByUserName, getUsersDetailsByUsername } from "../../services";
 import { SET_OTHER_USER_POSTS } from "../../reducer/actions/actions";
@@ -19,17 +19,21 @@ const ProfilePage = () => {
   const [isLoadingUserDetails, setIsLoadingUserDetails] = useState(false);
   const [isLoadingUserPosts, setIsLoadingUserPosts] = useState(false);
   const [openEditProfileModel, setOpenEditProfileModel] = useState(false);
-  const { otherUser, setOtherUser } = useUsers();
+  const {
+    user: { otherUser },
+    dispatchUser
+  } = useUsers();
   const {
     posts: { otherUserPosts },
     dispatchPosts
   } = usePosts();
+  const { currUser } = useAuth();
   const { userId } = useParams();
   useScrollToTop();
   const fetchUserDetails = async () => {
     await getUsersDetailsByUsername(
       userId,
-      setOtherUser,
+      dispatchUser,
       setIsLoadingUserDetails
     );
   };
@@ -65,7 +69,7 @@ const ProfilePage = () => {
       {!isLoadingUserDetails && otherUser ? (
         <div className="bg-white  shadow-md">
           <ProfileDetails
-            otherUser={otherUser}
+            otherUser={userId === currUser._id ? currUser : otherUser}
             editProfileModelHandler={editProfileModelHandler}
           />
           <Tabs>

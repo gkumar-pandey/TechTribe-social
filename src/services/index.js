@@ -1,23 +1,23 @@
 import { loginService, signupService } from "./auth-service/auth-service";
 
 import {
-  getAllUsers,
+  getAllUsersService,
   updateUserProfile,
   getUsersDetailsByUsername,
-  followUserService,
-  UnfollowUserService
+  followService,
+  unfollowService
 } from "./user-service/user-service";
 
 import {
   getPostsByUserName,
-  getAllPosts,
-  likePostService,
-  dislikePostService,
+  getAllPostsService,
+  likeService,
+  dislikeService,
   bookmarkService,
   getBookmarksService,
-  removeFromBookmarksService,
+  removeBookmarksService,
   uploadPostService,
-  deleteUserPostService,
+  deletePostService,
   editPostService
 } from "./post-service/post-service";
 
@@ -25,18 +25,18 @@ export {
   loginService,
   signupService,
   getPostsByUserName,
-  getAllUsers,
+  getAllUsersService,
   updateUserProfile,
   getUsersDetailsByUsername,
-  likePostService,
-  getAllPosts,
-  dislikePostService,
+  likeService,
+  dislikeService,
+  getAllPostsService,
   bookmarkService,
   getBookmarksService,
-  removeFromBookmarksService,
+  removeBookmarksService,
   uploadPostService,
-  followUserService,
-  UnfollowUserService,
-  deleteUserPostService,
+  followService,
+  unfollowService,
+  deletePostService,
   editPostService
 };

@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { usePosts } from "../../context";
 import { Post, SpinLoader } from "../../components";
-import { getBookmarksService } from "../../services";
 import { useScrollToTop } from "../../hooks";
 
 const BookmarkPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const {
-    posts: { BookmarksPosts },
-    token,
-    dispatchPosts
+    posts: { bookmarks },
+    getBookmarksPosts
   } = usePosts();
   useScrollToTop();
 
-  const fetchBookmarksPosts = async () => {
-    await getBookmarksService(setIsLoading, token, dispatchPosts);
-  };
-
   useEffect(() => {
-    fetchBookmarksPosts();
+    getBookmarksPosts(setIsLoading);
   }, []);
 
   return (
@@ -30,7 +24,7 @@ const BookmarkPage = () => {
         <SpinLoader />
       ) : (
         <>
-          {BookmarksPosts?.length === 0 ? (
+          {bookmarks?.length === 0 ? (
             <div>
               <h2 className=" text-center text-xl text-gray-700 font-bold ">
                 No Bookmark to show
@@ -38,7 +32,7 @@ const BookmarkPage = () => {
             </div>
           ) : (
             <>
-              {BookmarksPosts.map((post) => (
+              {bookmarks.map((post) => (
                 <Post {...post} key={post._id} />
               ))}
             </>

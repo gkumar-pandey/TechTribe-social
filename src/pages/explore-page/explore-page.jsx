@@ -4,19 +4,12 @@ import { Post, PostsShimmerLoader } from "../../components";
 import { useScrollToTop } from "../../hooks";
 
 const ExplorePage = () => {
-  const {
-    posts: { AllPosts },
-    fetchAllPosts
-  } = usePosts();
+  const { posts } = usePosts();
   useScrollToTop();
-
-  useEffect(() => {
-    fetchAllPosts();
-  }, []);
 
   return (
     <div>
-      {AllPosts?.length === 0 ? (
+      {posts?.all?.length === 0 ? (
         <>
           {[...Array(4)].map((_, idx) => (
             <PostsShimmerLoader key={idx} />
@@ -24,7 +17,7 @@ const ExplorePage = () => {
         </>
       ) : (
         <>
-          {AllPosts.map((post) => (
+          {posts?.all?.map((post) => (
             <Post {...post} key={post._id} />
           ))}
           <p className=" text-gray-600 text-lg text-center py-2 font-semibold  ">

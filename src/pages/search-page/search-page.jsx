@@ -10,7 +10,7 @@ export const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const {
-    usersState: { suggestedUsers }
+    user: { suggestedUsers }
   } = useUsers();
 
   const searchQuery = useDebounce(inputValue, 300);
@@ -44,7 +44,7 @@ export const SearchPage = () => {
   };
 
   return (
-    <div className=" bg-white ">
+    <div className=" bg-white min-h-screen ">
       <div className=" text-2xl font-bold text-center text-green-700 p-4 ">
         <h2>Search your friends</h2>
       </div>

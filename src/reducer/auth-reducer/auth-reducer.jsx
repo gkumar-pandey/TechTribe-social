@@ -1,5 +1,6 @@
 import {
   RESET_FORM,
+  SET_CURR_USER,
   SET_FORM_DATA,
   SET_TEST_USER,
   VALIDATION_ERROR
@@ -39,6 +40,16 @@ export const loginReducer = (state, { type, payload }) => {
       return { ...payload };
     case RESET_FORM:
       return { username: "", password: "" };
+
+    default:
+      return state;
+  }
+};
+
+export const currUserReducer = (state, { type, payload }) => {
+  switch (type) {
+    case SET_CURR_USER:
+      return { ...state, ...payload };
 
     default:
       return state;

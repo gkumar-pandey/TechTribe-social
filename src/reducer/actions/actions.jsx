@@ -14,7 +14,20 @@ export const SET_OTHER_USER_POSTS = "SET_OTHER_USER_POSTS";
 export const UPDATE_POSTS = "UPDATE_POSTS";
 
 export const SET_USERS = "SET_USERS";
+export const SET_OTHER_USER = "SET_OTHER_USER";
 export const SET_SUGGESTED_USER = "SET_SUGGESTED_USER";
 export const RESET = "RESET";
+export const UPDATE_OTHER_USER = "UPDATE_OTHER_USER";
 export const SET_CURR_USER = "SET_CURR_USER";
-export const DELETE_USER_POST = "DELETE_USER_POST";
+
+//* Posts  Actions*/
+export const LIKE_POST = "LIKE_POST";
+export const DISLIKE_POST = "DISLIKE_POST";
+export const BOOKMARK_POST = "BOOKMARK_POST";
+export const DELETE_POST = "DELETE_POST";
+export const REMOVE_FROM_BOOKMARK = "REMOVE_FROM_BOOKMARK";
+export const ADD_NEW_POST = "ADD_NEW_POST";
+export const UPDATE_POST = "UPDATE_POST";
+
+//* Follow Btn Actions *//
+export const FOLLOW = "FOLLOW";

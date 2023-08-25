@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useAuth, useUsers } from "../../../context";
 import Avatar from "../../Avatar/Avatar";
 import Button from "../../Buttons/Button";
+import { isFollowing } from "../../../utils";
 
 const ProfileCoverAndPic = ({
   profileImage,
@@ -11,21 +12,16 @@ const ProfileCoverAndPic = ({
   coverImage,
   editProfileModelHandler
 }) => {
-  const { followBtnHandler, unfollowBtnHandler } = useUsers();
-  const { currUserState } = useAuth();
-  const currUserId = currUserState?._id;
-  const currUserFollowing = currUserState?.following;
+  const { followHandler, unfollowHandler } = useUsers();
+  const { currUser } = useAuth();
   const [onHover, setOnHover] = useState(false);
-
   const { userId } = useParams();
 
-  const isFollowing = currUserFollowing?.find((ele) => ele._id === userId);
-
-  const followToggle = () => {
-    if (isFollowing) {
-      unfollowBtnHandler(userId);
+  const followBtnHandler = () => {
+    if (isFollowing(currUser?.following, userId)) {
+      unfollowHandler(userId);
     } else {
-      followBtnHandler(userId);
+      followHandler(userId);
     }
   };
 
@@ -45,18 +41,18 @@ const ProfileCoverAndPic = ({
           <div className=" absolute left-3 top-1/2  border-4 border-slate-50 rounded-full  ">
             <Avatar size={"xl"} image={profileImage} alt={username} />
           </div>
-          {currUserId === userId ? (
+          {currUser._id === userId ? (
             <Button onClick={editProfileModelHandler} BtnType={"outlined"}>
               Edit profile
             </Button>
           ) : (
             <>
-              {isFollowing ? (
-                <Button onClick={followToggle} BtnType={"outlined"}>
+              {isFollowing(currUser?.following, userId) ? (
+                <Button onClick={followBtnHandler} BtnType={"outlined"}>
                   {onHover ? "Unfollow" : "Following"}
                 </Button>
               ) : (
-                <Button BtnType={"solid"} onClick={followToggle}>
+                <Button BtnType={"solid"} onClick={followBtnHandler}>
                   Follow
                 </Button>
               )}

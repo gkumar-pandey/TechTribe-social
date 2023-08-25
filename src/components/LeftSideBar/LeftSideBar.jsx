@@ -16,7 +16,7 @@ import SideBarBtn from "./components/SideBarBtn";
 import { useAuth } from "../../context";
 
 const LeftSideBar = () => {
-  const { currUserState, logoutHandler } = useAuth();
+  const { currUser, logoutHandler } = useAuth();
   const [openDropDown, setOpenDropDown] = useState(false);
   const [openPostFormModal, setOpenPostFormModal] = useState(false);
 
@@ -41,7 +41,7 @@ const LeftSideBar = () => {
     {
       name: "Profile",
       icon: <PersonIcon sx={{ fontSize: "2rem" }} />,
-      link: `/profile/${currUserState?._id}`
+      link: `/profile/${currUser?._id}`
     }
   ];
 
@@ -54,9 +54,9 @@ const LeftSideBar = () => {
   };
   return (
     <>
-      <div className=" sm:hidden flex flex-col justify-between bg-white border border-gray-100 shadow-md rounded w-full xl:w-5/6   max-w-[30rem] px-2 py-4 sticky top-24 h-full max-h-[80vh] ">
+      <div className=" sm:hidden flex flex-col justify-between bg-white border border-gray-100 shadow-md rounded w-full xl:w-5/6 max-w-[30rem] px-2 py-4 sticky top-24  h-[80vh] ">
         <div>
-          <div className="   ">
+          <div>
             {sideBarBtns.map((item, idx) => (
               <SideBarBtn key={idx} {...item} />
             ))}
@@ -74,12 +74,12 @@ const LeftSideBar = () => {
           className="flex items-center justify-between py-2 px-1 hover:bg-slate-100 cursor-pointer rounded relative "
         >
           <div className="flex items-center text-sm gap-2 ">
-            <Avatar image={currUserState?.profileImage} />
+            <Avatar image={currUser?.profileImage} />
             <div>
               <p className=" font-semibold ">
-                {currUserState?.firstName + " " + currUserState?.lastName}
+                {currUser?.firstName + " " + currUser?.lastName}
               </p>
-              <p>{currUserState?.username}</p>
+              <p>{currUser?.username}</p>
             </div>
           </div>
           <div>
@@ -90,18 +90,18 @@ const LeftSideBar = () => {
               openDropDown ? "" : "hidden"
             }  `}
           >
-            <div className=" flex flex-col items-start p-2   ">
+            <div className="flex flex-col items-start p-2">
               <button
                 onClick={() => navigate("/login")}
-                className=" my-1 py-1 px-3 rounded hover:bg-slate-100 font-medium "
+                className="my-1 py-1 px-3 rounded hover:bg-slate-100 font-medium"
               >
                 Add an existing account
               </button>
               <button
                 onClick={logoutHandler}
-                className="my-1 py-1 px-3 rounded bg-red-600 text-white font-medium "
+                className="my-1 py-1 px-3 rounded bg-red-600 text-white font-medium"
               >
-                Log out @{currUserState?.username}
+                Log out @{currUser?.username}
               </button>
             </div>
           </div>
@@ -111,7 +111,7 @@ const LeftSideBar = () => {
           isOpen={openPostFormModal}
           onClose={togglePostBtn}
         >
-          <PostForm />
+          <PostForm closeModal={togglePostBtn} />
         </Modal>
       </div>
     </>

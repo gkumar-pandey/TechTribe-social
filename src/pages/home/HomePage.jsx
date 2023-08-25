@@ -24,12 +24,12 @@ const HomePage = () => {
   return (
     <div className="bg-slate-50 py-8 min-h-screen ">
       <Container>
-        <div className="px-2 relative ">
+        <div className="px-2 relative">
           <Grid>
             <div>
               <LeftSideBar />
             </div>
-            <div className=" w-full h-full px-2 ">
+            <div className=" w-full min-h-screen px-2 ">
               <div className="max-w-[40rem] mx-auto ">
                 {isFeedPage && <FeedPage />}
                 {isProfilePage && <ProfilePage />}
@@ -39,9 +39,12 @@ const HomePage = () => {
                 {isSearchPage && <SearchPage />}
               </div>
             </div>
-            <div className=" flex  flex-col   items-end md:hidden  ">
-              <RightSideBar />
-            </div>
+
+            {(isFeedPage || isExplorePage || isSearchPage) && (
+              <div className=" flex  flex-col   items-end md:hidden  ">
+                <RightSideBar />
+              </div>
+            )}
           </Grid>
         </div>
       </Container>

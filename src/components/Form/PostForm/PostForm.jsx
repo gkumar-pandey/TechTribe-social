@@ -1,26 +1,85 @@
 import React, { useState } from "react";
-import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
-import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import { useAuth, usePosts } from "../../../context";
 import { uploadPostService } from "../../../services";
+import { Loader } from "../../Loader/Loader";
+import styles from "./postform.module.css";
+import {
+  EmojiBtn,
+  PostMediaComp,
+  PostTextArea,
+  UploadPhotoBtn
+} from "./component";
+import Emoji from "../../Emoji/Emoji";
+import { toast } from "react-hot-toast";
+import { ADD_NEW_POST } from "../../../reducer";
 
-const PostForm = () => {
+const PostForm = ({ closeModal }) => {
   const {
-    currUserState: { username, firstName, lastName, profileImage, userId }
+    currUser: { username, firstName, lastName, profileImage, _id },
+    token
   } = useAuth();
+
+  const [selectedFile, setSelectedFile] = useState("");
   const [postFormData, setPostFormData] = useState({
-    content: ""
+    content: "",
+    mediaUrl: ""
   });
+  const [selectEmoji, setSelectEmoji] = useState(false);
   const { dispatchPosts } = usePosts();
+  const [isLoading, setIsLoading] = useState(false);
 
   const postBtnHandler = async (e) => {
     e.preventDefault();
-    const token = JSON.parse(localStorage.getItem("user"))?.token;
-    await uploadPostService(
-      { ...postFormData, userId, username, firstName, lastName, profileImage },
-      token,
-      dispatchPosts
-    );
+    setIsLoading(true);
+    let mediaUrl = "";
+    if (selectedFile) {
+      mediaUrl = await uploadToCloudinary(selectedFile);
+    }
+    try {
+      const { data, status } = await uploadPostService(
+        {
+          ...postFormData,
+          mediaUrl: mediaUrl,
+          userId: _id,
+          username,
+          firstName,
+          lastName,
+          profileImage
+        },
+        token
+      );
+
+      if (status === 201) {
+        dispatchPosts({ type: ADD_NEW_POST, payload: data.posts });
+        setIsLoading(false);
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+      setIsLoading(false);
+    }
+  };
+
+  const uploadToCloudinary = async (file) => {
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "techtribe");
+    data.append("cloud_name", "dlykup1dh");
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dlykup1dh/auto/upload",
+        {
+          method: "POST",
+          body: data
+        }
+      );
+      const resData = await res.json();
+
+      return resData?.url;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onChangeHandler = (e) => {
@@ -28,35 +87,75 @@ const PostForm = () => {
     const value = e.target.value;
     setPostFormData((pre) => ({ ...pre, [name]: value }));
   };
+  const emojiSelectHandler = (e) => {
+    console.log(e.emoji);
+    setPostFormData((pre) => ({
+      ...pre,
+      content: postFormData.content + e.emoji
+    }));
+  };
+
+  const isPostBtnDisable =
+    postFormData.content === "" && postFormData.mediaUrl === "";
+
+  const uploadPostImage = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    const url = URL.createObjectURL(file);
+    setSelectedFile(file);
+    setPostFormData((pre) => ({ ...pre, mediaUrl: url }));
+  };
+
+  const removePostMediaHandler = () => {
+    setPostFormData((pre) => ({ ...pre, mediaUrl: "" }));
+    setSelectedFile("");
+  };
 
   return (
     <div>
       <div>
-        <form onSubmit={postBtnHandler} className=" p-4 ">
-          <textarea
-            placeholder="What's happening"
-            className=" text-xl w-full p-2 border border-gray-600 rounded-md focus:outline-green-600 "
-            rows={"6"}
-            name="content"
-            onChange={onChangeHandler}
-          ></textarea>
-          <div className="flex items-center justify-between py-2 ">
+        <form onSubmit={postBtnHandler} className="p-4">
+          <PostTextArea
+            value={postFormData?.content}
+            onChangeHandler={onChangeHandler}
+            mediaUrl={postFormData?.mediaUrl}
+          />
+          <>
+            {postFormData?.mediaUrl && (
+              <PostMediaComp
+                mediaUrl={postFormData?.mediaUrl}
+                removePostMediaHandler={removePostMediaHandler}
+              />
+            )}
+          </>
+          <div className="flex items-center justify-between py-2">
             <div>
               <div className="flex  items-center gap-4 my-1 ">
-                <div className="flex items-center gap-1 text-green-700 font-semibold ">
-                  <AddReactionOutlinedIcon />
-                </div>
-                <div>
-                  <label className=" flex items-center cursor-pointer ">
-                    <AddPhotoAlternateOutlinedIcon className="text-green-700 font-semibold " />
-                    <input type="file" accept="image/*" className=" hidden " />
-                  </label>
-                </div>
+                <EmojiBtn onClick={() => setSelectEmoji(!selectEmoji)} />
+                <UploadPhotoBtn uploadPostImage={uploadPostImage} />
+                {selectEmoji && (
+                  <Emoji
+                    onClose={() => setSelectEmoji(!selectEmoji)}
+                    emojiSelectHandler={emojiSelectHandler}
+                  />
+                )}
               </div>
             </div>
-            <button className=" bg-green-700 text-white px-4 py-1 font-semibold rounded text-md ">
-              Add Post
-            </button>
+            <div className="flex items-center flow-row gap-3">
+              <button
+                type="button"
+                onClick={() => closeModal()}
+                className={`${styles.cancel_btn}`}
+              >
+                cancel
+              </button>
+              <button
+                disabled={isPostBtnDisable}
+                className={`${styles.btn} ${isPostBtnDisable && "opacity-80"}`}
+              >
+                {isLoading ? <Loader /> : "Add Post"}
+              </button>
+            </div>
           </div>
         </form>
       </div>

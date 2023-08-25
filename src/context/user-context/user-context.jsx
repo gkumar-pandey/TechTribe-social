@@ -1,67 +1,74 @@
+import { createContext, useContext, useReducer } from "react";
+
 import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState
-} from "react";
-import {
-  UsersInitialState,
-  UsersReducer
-} from "../../reducer/user-reducer/user-reducer";
-import {
-  UnfollowUserService,
-  followUserService,
-  getAllUsers
+  followService,
+  unfollowService,
+  getAllUsersService
 } from "../../services";
 import { useAuth } from "../auth-context/auth-context";
+import { userReducer, userInitialState } from "../../reducer";
+
+import { toast } from "react-hot-toast";
+import { FOLLOW, SET_SUGGESTED_USER } from "../../reducer/actions/actions";
 
 const UserContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [usersState, dispatchUsers] = useReducer(
-    UsersReducer,
-    UsersInitialState
-  );
-  const [otherUser, setOtherUser] = useState("");
-  const { dispatchCurrUser } = useAuth();
+  const [user, dispatchUser] = useReducer(userReducer, userInitialState);
+  const { setCurrUser, token } = useAuth();
 
-  const token = JSON.parse(localStorage.getItem("user"))?.token;
-
-  const fetchAllUsers = async () => {
-    await getAllUsers(dispatchUsers);
+  const getAllUsers = async () => {
+    try {
+      const { data, status } = await getAllUsersService();
+      if (status) {
+        dispatchUser({ type: SET_SUGGESTED_USER, payload: data.users });
+      }
+    } catch (err) {
+      console.error(err.message);
+      toast.error(err.message);
+    }
   };
 
-  const followBtnHandler = async (followUserId) => {
-    await followUserService(
-      followUserId,
-      token,
-      dispatchCurrUser,
-      setOtherUser
-    );
+  const followHandler = async (userId) => {
+    try {
+      const { data, status } = await followService(userId, token);
+      const user = data?.user;
+      const followUser = data?.followUser;
+
+      if (status === 200) {
+        dispatchUser({ type: FOLLOW, payload: followUser });
+        setCurrUser({ ...user });
+      }
+    } catch (err) {
+      console.error(err.message);
+      toast.error(err.message);
+    }
   };
 
-  const unfollowBtnHandler = async (followUserId) => {
-    await UnfollowUserService(
-      followUserId,
-      token,
-      dispatchCurrUser,
-      setOtherUser
-    );
+  const unfollowHandler = async (userId) => {
+    try {
+      const { data, status } = await unfollowService(userId, token);
+      const user = data?.user;
+      const followUser = data?.followUser;
+
+      if (status === 200) {
+        dispatchUser({ type: FOLLOW, payload: followUser });
+        setCurrUser({ ...user });
+      }
+    } catch (err) {
+      toast.error(err.message);
+      console.error(err.message);
+    }
   };
 
-  useEffect(() => {
-    fetchAllUsers();
-  }, []);
   return (
     <UserContext.Provider
       value={{
-        usersState,
-        dispatchUsers,
-        followBtnHandler,
-        unfollowBtnHandler,
-        otherUser,
-        setOtherUser
+        user,
+        dispatchUser,
+        followHandler,
+        unfollowHandler,
+        getAllUsers
       }}
     >
       {children}
