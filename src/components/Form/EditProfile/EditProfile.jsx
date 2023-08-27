@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useAuth, useUsers } from "../../../context";
+import { useAuth, usePosts, useUsers } from "../../../context";
 import { updateUserProfile } from "../../../services";
 import EditFormInput from "./component/EditFormInput";
 import UpdateProfileAndCover from "./component/UpdateProfileAndCover";
 import styles from "./editform.module.css";
 
-const EditProfile = ({ editProfileModalHandler }) => {
+const EditProfile = () => {
   const { currUser, setCurrUser } = useAuth();
   const { setOtherUser } = useUsers();
+  const { dispatchModal } = usePosts();
   const [isUploading, setIsUploading] = useState(false);
   const [editData, setEditData] = useState({
     firstName: "",
@@ -70,7 +71,7 @@ const EditProfile = ({ editProfileModalHandler }) => {
       setCurrUser,
       setOtherUser,
       setIsUploading,
-      editProfileModalHandler
+      dispatchModal
     );
   };
 

@@ -35,5 +35,5 @@ export const FOLLOW = "FOLLOW";
 //*Modal actions *//
 
 export const POST_MODAL = "POST_MODAL";
-export const OPEN_POST_MODAL = "OPEN_POST_MODAL";
-export const CLOSE_POST_MODAL = "CLOSE_POST_MODAL";
+export const EDIT_POST_MODAL = "EDIT_POST_MODAL";
+export const EDIT_PROFILE_MODAL = "EDIT_PROFILE_MODAL";

@@ -11,7 +11,9 @@ import {
   SET_OTHER_USER_POSTS,
   ADD_NEW_POST,
   UPDATE_POST,
-  POST_MODAL
+  POST_MODAL,
+  EDIT_POST_MODAL,
+  EDIT_PROFILE_MODAL
 } from "../actions/actions";
 
 export const postsInitialState = {
@@ -24,7 +26,8 @@ export const postsInitialState = {
 
 export const modalInitialState = {
   addPost: false,
-  editPost: false
+  editPost: false,
+  editProfile: false
 };
 
 export const PostsReducer = (state, { type, payload }) => {
@@ -77,6 +80,10 @@ export const modalReducer = (state, { type, payload }) => {
   switch (type) {
     case POST_MODAL:
       return { ...state, addPost: !state.addPost };
+    case EDIT_POST_MODAL:
+      return { ...state, editPost: !state.editPost };
+    case EDIT_PROFILE_MODAL:
+      return { ...state, editProfile: !state.editProfile };
     default:
       return { ...state };
   }

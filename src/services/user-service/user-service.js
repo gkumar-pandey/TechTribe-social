@@ -1,6 +1,9 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { SET_OTHER_USER } from "../../reducer/actions/actions";
+import {
+  EDIT_PROFILE_MODAL,
+  SET_OTHER_USER
+} from "../../reducer/actions/actions";
 
 export const getAllUsersService = async () => {
   return await axios.get(`/api/users`);
@@ -55,7 +58,7 @@ export const updateUserProfile = async (
   setCurrUser,
   setOtherUser,
   setIsUploading,
-  editProfileModalHandler
+  dispatchModal
 ) => {
   setIsUploading(true);
   try {
@@ -73,7 +76,7 @@ export const updateUserProfile = async (
       setOtherUser(res?.data?.user);
       toast.success("profile updated successfully");
       setIsUploading(false);
-      editProfileModalHandler();
+      dispatchModal({ type: EDIT_PROFILE_MODAL });
     } else {
       toast.error("Something went wrong!");
       console.error("Something went wrong");

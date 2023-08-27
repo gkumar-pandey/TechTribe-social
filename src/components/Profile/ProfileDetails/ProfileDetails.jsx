@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import { useAuth, useUsers } from "../../../context";
+import { useAuth, usePosts, useUsers } from "../../../context";
 import Avatar from "../../Avatar/Avatar";
 import Button from "../../Buttons/Button";
 import { isFollowing } from "../../../utils";
+import { EDIT_PROFILE_MODAL } from "../../../reducer";
 
 const ProfileCoverAndPic = ({
   profileImage,
@@ -14,6 +15,7 @@ const ProfileCoverAndPic = ({
 }) => {
   const { followHandler, unfollowHandler } = useUsers();
   const { currUser } = useAuth();
+  const { dispatchModal } = usePosts();
   const [onHover, setOnHover] = useState(false);
   const { userId } = useParams();
 
@@ -42,7 +44,10 @@ const ProfileCoverAndPic = ({
             <Avatar size={"xl"} image={profileImage} alt={username} />
           </div>
           {currUser._id === userId ? (
-            <Button onClick={editProfileModelHandler} BtnType={"outlined"}>
+            <Button
+              onClick={() => dispatchModal({ type: EDIT_PROFILE_MODAL })}
+              BtnType={"outlined"}
+            >
               Edit profile
             </Button>
           ) : (
@@ -108,7 +113,7 @@ const UserProfileDetails = ({
   );
 };
 
-const ProfileDetails = ({ otherUser, editProfileModelHandler }) => {
+const ProfileDetails = ({ otherUser }) => {
   const { otherUsersPosts } = useUsers();
 
   const nameOfUser = otherUser?.firstName + " " + otherUser?.lastName;
@@ -127,7 +132,6 @@ const ProfileDetails = ({ otherUser, editProfileModelHandler }) => {
         username={otherUser?.username}
         profileImage={otherUser?.profileImage}
         coverImage={otherUser?.coverImage}
-        editProfileModelHandler={editProfileModelHandler}
       />
       <UserProfileDetails
         nameOfUser={nameOfUser}
