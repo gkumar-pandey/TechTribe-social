@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import PostContent from "./components/PostContent";
 import PostMedia from "./components/PostMedia";
 import Avatar from "../Avatar/Avatar";
-import { AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
 import { FaRegBookmark, FaRegComment } from "react-icons/fa";
 import styles from "./post.module.css";
 import { useAuth, usePosts } from "../../context";
 import CommentCard from "./components/CommentCard";
 import { Loader } from "../Loader/Loader";
 import { recentComments } from "../../utils";
+import { toast } from "react-hot-toast";
+import { dislikeService, likeService } from "../../services";
+import { BookmarkIconComp } from "./components/PostIcons";
 
 const PostDetailsTopSection = ({
   username,
@@ -29,21 +32,45 @@ const PostDetailsTopSection = ({
   );
 };
 
-const PostDetailsLikesSection = ({ likes, comments }) => {
+const PostDetailsLikesSection = ({
+  likes,
+  comments,
+  likeBtnHandler,
+  isLiked,
+  _id
+}) => {
+  const [onHover, setOnHover] = useState(false);
+  const likesCount = likes?.likeCount;
+
   return (
     <>
-      <div className="my-2 py-1 border-t border-b text-md font-semibold border-gray-500 ">
-        <div>
-          <span>{likes?.likeCount}</span>
-          <span>Likes</span>
-        </div>
-      </div>
-      <div className=" flex items-center justify-between py-1">
+      <div className=" flex my-2 items-center justify-between py-1 border-l-0 border-r-0 px-1 border border-gray-500 ">
         <div className=" flex items-center gap-5 ">
-          <div className=" flex items-center text-xl gap-1 ">
-            <AiOutlineHeart className={styles.icon} />
-            <span>5</span>
+          <div
+            onMouseEnter={() => setOnHover(!onHover)}
+            onMouseLeave={() => setOnHover(!onHover)}
+            className=" flex items-center text-xl gap-1 group "
+          >
+            {isLiked || onHover ? (
+              <span
+                onClick={likeBtnHandler}
+                className={`p-2 rounded-full  ${
+                  onHover && "group-hover:bg-red-200"
+                } `}
+              >
+                <AiFillHeart className={styles.likedIcon} />
+              </span>
+            ) : (
+              <span
+                onClick={likeBtnHandler}
+                className={styles.likeIcon_wrapper}
+              >
+                <AiOutlineHeart className={styles.icon} />
+              </span>
+            )}
+            <span>{likesCount}</span>
           </div>
+
           <div className=" flex items-center text-xl gap-1 ">
             <FaRegComment className={styles.icon} />
             <span>{comments?.length}</span>
@@ -53,7 +80,7 @@ const PostDetailsLikesSection = ({ likes, comments }) => {
           </div>
         </div>
         <div>
-          <FaRegBookmark className={styles.icon} />
+          <BookmarkIconComp postId={_id} />
         </div>
       </div>
     </>
@@ -80,7 +107,7 @@ const CommentSection = ({ postId, setPostDetails, comments }) => {
 
   return (
     <div>
-      <div className=" flex items-center my-2 ">
+      <div className=" flex items-center my-4 ">
         <Avatar image={currUser.profileImage} alt={currUser.firstName} />
         <input
           value={comment}
@@ -113,13 +140,37 @@ const CommentSection = ({ postId, setPostDetails, comments }) => {
 };
 
 const PostDetails = ({ postDetails, setPostDetails }) => {
+  const { token, currUser } = useAuth();
+  const isLiked = postDetails?.likes?.likedBy.find(
+    (ele) => ele._id === currUser._id
+  );
+
+  const likeBtnHandler = async () => {
+    try {
+      const { data, status } = isLiked
+        ? await dislikeService(postDetails._id, token)
+        : await likeService(postDetails._id, token);
+      const post = data.posts.find((ele) => ele._id === postDetails._id);
+
+      if (status) {
+        setPostDetails(post);
+      }
+    } catch (err) {
+      console.error(err.message);
+      toast.error(err.message);
+    }
+  };
   return (
     <div className="p-4 bg-white rounded-md shadow-md ">
       <PostDetailsTopSection {...postDetails} />
       <PostContent {...postDetails} />
       {postDetails.mediaUrl && <PostMedia {...postDetails} />}
 
-      <PostDetailsLikesSection {...postDetails} />
+      <PostDetailsLikesSection
+        likeBtnHandler={likeBtnHandler}
+        isLiked={isLiked}
+        {...postDetails}
+      />
       <CommentSection
         postId={postDetails._id}
         comments={postDetails.comments}
