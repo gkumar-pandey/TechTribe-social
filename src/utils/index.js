@@ -2,7 +2,7 @@ import {
   signupValidation,
   loginValidation
 } from "./authvalidation/AuthValidation";
-import { sortPosts, isFollowing } from "./filters/filters";
+import { sortPosts, isFollowing, recentComments } from "./filters/filters";
 import { isLikedByCurrUser } from "./utils/utils";
 
 export {
@@ -10,5 +10,6 @@ export {
   loginValidation,
   sortPosts,
   isFollowing,
-  isLikedByCurrUser
+  isLikedByCurrUser,
+  recentComments
 };

@@ -5,6 +5,7 @@ import { FaRegBookmark, FaRegComment } from "react-icons/fa";
 import styles from "../post.module.css";
 
 import { usePosts } from "../../../context/post-context/post-context";
+import { Link } from "react-router-dom";
 
 const LikeIcon = ({ likesCount, isLikedByUser, postId }) => {
   const [hover, setHover] = useState(false);
@@ -71,7 +72,7 @@ const CommentIcon = ({ commentCount }) => {
   );
 };
 
-const BookmarkIconComp = ({ postId }) => {
+export const BookmarkIconComp = ({ postId }) => {
   const [hover, setHover] = useState(false);
 
   const {
@@ -125,7 +126,9 @@ const PostIcons = ({ likes, comments, _id, isLikedByUser }) => {
           postId={_id}
           isLikedByUser={isLikedByUser}
         />
-        <CommentIcon commentCount={commentCount} />
+        <Link to={`/post/${_id}`}>
+          <CommentIcon commentCount={commentCount} />
+        </Link>
         <div className=" flex items-center text-xl gap-1 ">
           <AiOutlineShareAlt className={styles.icon} />
         </div>

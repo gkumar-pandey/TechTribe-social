@@ -31,3 +31,9 @@ export const UPDATE_POST = "UPDATE_POST";
 
 //* Follow Btn Actions *//
 export const FOLLOW = "FOLLOW";
+
+//*Modal actions *//
+
+export const POST_MODAL = "POST_MODAL";
+export const EDIT_POST_MODAL = "EDIT_POST_MODAL";
+export const EDIT_PROFILE_MODAL = "EDIT_PROFILE_MODAL";

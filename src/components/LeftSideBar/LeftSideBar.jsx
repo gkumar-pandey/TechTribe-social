@@ -13,15 +13,19 @@ import Modal from "../Modal/Modal";
 import PostForm from "../Form/PostForm/PostForm";
 import PostModalTitle from "../Form/PostForm/component/PostModalTitle";
 import SideBarBtn from "./components/SideBarBtn";
-import { useAuth } from "../../context";
+import { useAuth, usePosts } from "../../context";
+import { POST_MODAL } from "../../reducer";
 
 const LeftSideBar = () => {
   const { currUser, logoutHandler } = useAuth();
   const [openDropDown, setOpenDropDown] = useState(false);
-  const [openPostFormModal, setOpenPostFormModal] = useState(false);
-
+  const {
+    modal: { addPost },
+    dispatchModal
+  } = usePosts();
   const navigate = useNavigate();
-  const sideBarBtns = [
+
+  const navigationLinks = [
     { name: "Home", icon: <HomeIcon sx={{ fontSize: "2rem" }} />, link: "/" },
     {
       name: "Explore",
@@ -49,20 +53,17 @@ const LeftSideBar = () => {
     setOpenDropDown(!openDropDown);
   };
 
-  const togglePostBtn = () => {
-    setOpenPostFormModal(!openPostFormModal);
-  };
   return (
     <>
       <div className=" sm:hidden flex flex-col justify-between bg-white border border-gray-100 shadow-md rounded w-full xl:w-5/6 max-w-[30rem] px-2 py-4 sticky top-24  h-[80vh] ">
         <div>
           <div>
-            {sideBarBtns.map((item, idx) => (
+            {navigationLinks.map((item, idx) => (
               <SideBarBtn key={idx} {...item} />
             ))}
           </div>
           <button
-            onClick={togglePostBtn}
+            onClick={() => dispatchModal({ type: POST_MODAL })}
             className="px-2 py-1 w-full rounded font-semibold my-1 text-lg bg-green-700 text-white "
           >
             Add Post
@@ -108,10 +109,10 @@ const LeftSideBar = () => {
         </div>
         <Modal
           title={<PostModalTitle />}
-          isOpen={openPostFormModal}
-          onClose={togglePostBtn}
+          isOpen={addPost}
+          onClose={() => dispatchModal({ type: POST_MODAL })}
         >
-          <PostForm closeModal={togglePostBtn} />
+          <PostForm closeModal={() => dispatchModal({ type: POST_MODAL })} />
         </Modal>
       </div>
     </>

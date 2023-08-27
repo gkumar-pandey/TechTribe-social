@@ -17,3 +17,11 @@
 .likeIcon_wrapper {
   @apply p-2 rounded-full hover:bg-red-200;
 }
+
+.username {
+  @apply text-sm text-gray-700;
+}
+
+.full_name {
+  @apply font-semibold text-lg hover:underline;
+}

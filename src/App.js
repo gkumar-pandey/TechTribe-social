@@ -1,7 +1,7 @@
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { LoginPage, SignUpPage, HomePage } from "./pages/index.jsx";
-import { Navbar, RequireAuth } from "./components";
+import { Navbar, NavigationBar, RequireAuth } from "./components";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -42,6 +42,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
       <Toaster />
+      {!isAuthPage && <NavigationBar />}
     </>
   );
 }

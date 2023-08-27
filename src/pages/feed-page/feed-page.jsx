@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   FeedPostBtn,
-  Modal,
   Post,
-  PostForm,
-  PostModalTitle,
   PostsShimmerLoader,
   SortComp
 } from "../../components";
@@ -14,13 +11,9 @@ import { useScrollToTop } from "../../hooks";
 
 const FeedPage = () => {
   const { currUser } = useAuth();
-  const [postFormModalOpen, setPostFormModal] = useState(false);
   const { posts, feedPosts } = usePosts();
-  useScrollToTop();
 
-  const togglePostFormModal = () => {
-    setPostFormModal(!postFormModalOpen);
-  };
+  useScrollToTop();
 
   const renderPosts = () => {
     if (!posts?.feed?.length) {
@@ -34,16 +27,9 @@ const FeedPage = () => {
 
   return (
     <div>
-      <FeedPostBtn user={currUser} togglePostFormModal={togglePostFormModal} />
+      <FeedPostBtn user={currUser} />
       <SortComp />
       <div>{renderPosts()}</div>
-      <Modal
-        title={<PostModalTitle />}
-        onClose={togglePostFormModal}
-        isOpen={postFormModalOpen}
-      >
-        <PostForm />
-      </Modal>
     </div>
   );
 };

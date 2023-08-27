@@ -25,7 +25,7 @@ const PostPage = () => {
   }, []);
   return (
     <div>
-      <PostDetails {...postDetails} />
+      <PostDetails postDetails={postDetails} setPostDetails={setPostDetails} />
     </div>
   );
 };

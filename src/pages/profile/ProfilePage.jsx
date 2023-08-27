@@ -13,18 +13,22 @@ import {
 import { useAuth, usePosts, useUsers } from "../../context";
 import { useScrollToTop } from "../../hooks";
 import { getPostsByUserName, getUsersDetailsByUsername } from "../../services";
-import { SET_OTHER_USER_POSTS } from "../../reducer/actions/actions";
+import {
+  EDIT_PROFILE_MODAL,
+  SET_OTHER_USER_POSTS
+} from "../../reducer/actions/actions";
 
 const ProfilePage = () => {
   const [isLoadingUserDetails, setIsLoadingUserDetails] = useState(false);
   const [isLoadingUserPosts, setIsLoadingUserPosts] = useState(false);
-  const [openEditProfileModel, setOpenEditProfileModel] = useState(false);
   const {
     user: { otherUser },
     dispatchUser
   } = useUsers();
   const {
     posts: { otherUserPosts },
+    modal: { editProfile },
+    dispatchModal,
     dispatchPosts
   } = usePosts();
   const { currUser } = useAuth();
@@ -52,10 +56,6 @@ const ProfilePage = () => {
     }
   };
 
-  const editProfileModelHandler = () => {
-    setOpenEditProfileModel(!openEditProfileModel);
-  };
-
   useEffect(() => {
     fetchUserDetails();
   }, [userId]);
@@ -67,10 +67,9 @@ const ProfilePage = () => {
   return (
     <div>
       {!isLoadingUserDetails && otherUser ? (
-        <div className="bg-white  shadow-md">
+        <div className="bg-white  shadow-md rounded-md overflow-hidden ">
           <ProfileDetails
             otherUser={userId === currUser._id ? currUser : otherUser}
-            editProfileModelHandler={editProfileModelHandler}
           />
           <Tabs>
             <h2>Posts</h2>
@@ -92,11 +91,11 @@ const ProfilePage = () => {
       )}
 
       <Modal
-        isOpen={openEditProfileModel}
-        onClose={editProfileModelHandler}
+        isOpen={editProfile}
+        onClose={() => dispatchModal({ type: EDIT_PROFILE_MODAL })}
         title={"Edit Profile"}
       >
-        <EditProfile editProfileModalHandler={editProfileModelHandler} />
+        <EditProfile />
       </Modal>
     </div>
   );

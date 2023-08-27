@@ -1,12 +1,15 @@
 import Avatar from "../Avatar/Avatar";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
+import { usePosts } from "../../context";
+import { POST_MODAL } from "../../reducer";
 
-const FeedPostBtn = ({ user, togglePostFormModal }) => {
+const FeedPostBtn = ({ user }) => {
+  const { dispatchModal } = usePosts();
   return (
     <>
       <button
-        onClick={togglePostFormModal}
+        onClick={() => dispatchModal({ type: POST_MODAL })}
         className=" flex flex-col gap-2 rounded-md bg-white p-4 my-2 shadow-md w-full  mx-auto "
       >
         <div className="flex flex-row gap-1 items-center  w-full ">

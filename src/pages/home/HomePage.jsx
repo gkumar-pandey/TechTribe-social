@@ -4,15 +4,30 @@ import { useLocation, useParams } from "react-router-dom";
 import ProfilePage from "../profile/ProfilePage";
 import PostPage from "../post/PostPage";
 import BookmarkPage from "../bookmark/Bookmark";
-import { Grid, RightSideBar, LeftSideBar, Container } from "../../components";
+import {
+  Grid,
+  RightSideBar,
+  LeftSideBar,
+  Container,
+  NavigationBar,
+  Modal,
+  PostModalTitle
+} from "../../components";
 import FeedPage from "../feed-page/feed-page";
 import ExplorePage from "../explore-page/explore-page";
 import { SearchPage } from "../search-page/search-page";
+import EditPostFrom from "../../components/Form/PostForm/EditPostFrom";
+import { usePosts } from "../../context";
+import { EDIT_POST_MODAL } from "../../reducer";
 
 const HomePage = () => {
   const location = useLocation();
   const { userId } = useParams();
   const { postId } = useParams();
+  const {
+    modal: { editPost },
+    dispatchModal
+  } = usePosts();
 
   const isFeedPage = location.pathname === "/";
   const isProfilePage = location.pathname === `/profile/${userId}`;
@@ -24,7 +39,7 @@ const HomePage = () => {
   return (
     <div className="bg-slate-50 py-8 min-h-screen ">
       <Container>
-        <div className="px-2 relative">
+        <div className="px-2 sm:px-0 relative">
           <Grid>
             <div>
               <LeftSideBar />
@@ -48,6 +63,13 @@ const HomePage = () => {
           </Grid>
         </div>
       </Container>
+      <Modal
+        isOpen={editPost}
+        title={<PostModalTitle />}
+        onClose={() => dispatchModal({ type: EDIT_POST_MODAL })}
+      >
+        <EditPostFrom />
+      </Modal>
     </div>
   );
 };

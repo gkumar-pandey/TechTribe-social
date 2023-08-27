@@ -22,3 +22,9 @@ export const isFollowing = (data, id) => {
     return false;
   }
 };
+
+export const recentComments = (comments) => {
+  return comments?.sort(
+    (a, b) => new Date(b.commentDate) - new Date(a.commentDate)
+  );
+};

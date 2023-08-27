@@ -99,3 +99,31 @@ export const editPostService = async (postId, token, postData) => {
     { headers: { authorization: token } }
   );
 };
+
+//** comment services */
+export const commentService = async (postId, token, comment) => {
+  return await axios.post(
+    `/api/comment/${postId}`,
+    { comment },
+    { headers: { authorization: token } }
+  );
+};
+
+export const editCommentService = async (
+  postId,
+  commentId,
+  commentData,
+  token
+) => {
+  return await axios.post(
+    `/api/comment/edit/${postId}/${commentId}`,
+    { commentData },
+    { headers: { authorization: token } }
+  );
+};
+
+export const deleteCommentService = async (postId, commentId, token) => {
+  return axios.delete(`/api/comment/delete/${postId}/${commentId}`, {
+    headers: { authorization: token }
+  });
+};

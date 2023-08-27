@@ -10,7 +10,10 @@ import {
   SET_BOOKMARK_POSTS,
   SET_OTHER_USER_POSTS,
   ADD_NEW_POST,
-  UPDATE_POST
+  UPDATE_POST,
+  POST_MODAL,
+  EDIT_POST_MODAL,
+  EDIT_PROFILE_MODAL
 } from "../actions/actions";
 
 export const postsInitialState = {
@@ -19,6 +22,12 @@ export const postsInitialState = {
   explore: [],
   bookmarks: [],
   otherUserPosts: []
+};
+
+export const modalInitialState = {
+  addPost: false,
+  editPost: false,
+  editProfile: false
 };
 
 export const PostsReducer = (state, { type, payload }) => {
@@ -64,5 +73,18 @@ export const PostsReducer = (state, { type, payload }) => {
       return { ...state, otherUserPosts: sortPosts(payload, "RECENT") };
     default:
       return state;
+  }
+};
+
+export const modalReducer = (state, { type, payload }) => {
+  switch (type) {
+    case POST_MODAL:
+      return { ...state, addPost: !state.addPost };
+    case EDIT_POST_MODAL:
+      return { ...state, editPost: !state.editPost };
+    case EDIT_PROFILE_MODAL:
+      return { ...state, editProfile: !state.editProfile };
+    default:
+      return { ...state };
   }
 };
