@@ -5,29 +5,35 @@ import { toast } from "react-hot-toast";
 import { editPostService } from "../../../services";
 import { useAuth, usePosts } from "../../../context";
 import { Loader } from "../../Loader/Loader";
-import { UPDATE_POST } from "../../../reducer";
+import { EDIT_POST_MODAL, UPDATE_POST } from "../../../reducer";
+import styles from "./postform.module.css";
 
-const EditPostFrom = ({ _id, content, mediaUrl }) => {
-  const [formData, setFormData] = useState({ _id: _id, content: content });
+const EditPostFrom = () => {
+  const { editPostFormData, setEditPostFormData } = usePosts();
   const [isUpdating, setIsUpdating] = useState(false);
-  const { dispatchPosts } = usePosts();
+  const { dispatchPosts, dispatchModal } = usePosts();
   const { token } = useAuth();
 
   const onChangeHandler = (e) => {
     const value = e.target.value;
     const name = e.target.name;
-    setFormData((pre) => ({ ...pre, [name]: value }));
+    setEditPostFormData((pre) => ({ ...pre, [name]: value }));
   };
 
   const updateBtnHandler = async (e) => {
     e.preventDefault();
     setIsUpdating(true);
     try {
-      const { data, status } = await editPostService(_id, token, formData);
+      const { data, status } = await editPostService(
+        editPostFormData?._id,
+        token,
+        editPostFormData
+      );
 
       if (status === 201) {
         dispatchPosts({ type: UPDATE_POST, payload: data?.posts });
         setIsUpdating(false);
+        dispatchModal({ type: EDIT_POST_MODAL });
       }
     } catch (error) {
       console.error(error.message);
@@ -44,29 +50,29 @@ const EditPostFrom = ({ _id, content, mediaUrl }) => {
               <textarea
                 placeholder="What's happening"
                 className={`text-xl ${
-                  mediaUrl ? "w-1/2" : "w-full"
-                } sm:w-full min-h-[18rem] sm:min-h-full p-2  border-gray-600 rounded focus:outline-green-600`}
-                value={formData?.content}
+                  editPostFormData?.mediaUrl ? "w-1/2" : "w-full"
+                } sm:w-full min-h-[18rem] sm:min-h-full p-2 focus:outline-none `}
+                value={editPostFormData?.content}
                 name="content"
                 onChange={onChangeHandler}
               ></textarea>
-              {mediaUrl && (
+              {editPostFormData?.mediaUrl && (
                 <img
                   className="w-1/2 h-[18rem] sm:w-full rounded object-fill"
-                  src={mediaUrl}
-                  alt={_id}
+                  src={editPostFormData?.mediaUrl}
+                  alt={editPostFormData?._id}
                 />
               )}
             </div>
             <div className="flex items-center justify-between py-2 ">
               <div>
-                <div className="flex  items-center gap-4 my-1 ">
-                  <div className="flex items-center gap-1 text-green-700 font-semibold ">
+                <div className="flex  items-center gap-4 my-1">
+                  <div className="flex items-center gap-1 text-green-700 font-semibold">
                     <AddReactionOutlinedIcon />
                   </div>
                   <div>
-                    <label className=" flex items-center cursor-pointer ">
-                      <AddPhotoAlternateOutlinedIcon className="text-green-700 font-semibold " />
+                    <label className="flex items-center cursor-pointer">
+                      <AddPhotoAlternateOutlinedIcon className="text-green-700 font-semibold" />
                       <input
                         type="file"
                         accept="image/*"
@@ -76,9 +82,19 @@ const EditPostFrom = ({ _id, content, mediaUrl }) => {
                   </div>
                 </div>
               </div>
-              <button className=" w-20 bg-green-700 text-white px-4 py-1 font-semibold rounded text-md ">
-                {isUpdating ? <Loader /> : "Save"}
-              </button>
+
+              <div className="flex items-center flow-row gap-3">
+                <button
+                  type="button"
+                  onClick={() => dispatchModal({ type: EDIT_POST_MODAL })}
+                  className={`${styles.cancel_btn}`}
+                >
+                  cancel
+                </button>
+                <button className={`${styles.btn} `}>
+                  {isUpdating ? <Loader /> : "save"}
+                </button>
+              </div>
             </div>
           </form>
         </div>

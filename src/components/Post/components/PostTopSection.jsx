@@ -6,16 +6,14 @@ import { useAuth, usePosts } from "../../../context";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Loader } from "../../Loader/Loader";
-import Modal from "../../Modal/Modal";
-import EditPostFrom from "../../Form/PostForm/EditPostFrom";
-import PostModalTitle from "../../Form/PostForm/component/PostModalTitle";
+
+import { EDIT_POST_MODAL } from "../../../reducer";
 
 const PostTopSection = (props) => {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [showEditPostModal, setShowEditPostModal] = useState(false);
   const [isLoadingDeletePost, setIsLoadingDeletePost] = useState(false);
   const { currUser } = useAuth();
-  const { deleteUserPost } = usePosts();
+  const { deleteUserPost, dispatchModal, setEditPostFormData } = usePosts();
   const { firstName, lastName, username, userId, _id } = props;
   const isAuthorizedUser = currUser?._id === userId;
 
@@ -23,10 +21,6 @@ const PostTopSection = (props) => {
     setIsLoadingDeletePost(true);
     await deleteUserPost(_id);
     setIsLoadingDeletePost(false);
-  };
-
-  const editPostBtnHandler = () => {
-    setShowEditPostModal(!showEditPostModal);
   };
 
   return (
@@ -56,7 +50,8 @@ const PostTopSection = (props) => {
             >
               <button
                 onClick={() => {
-                  editPostBtnHandler();
+                  setEditPostFormData(props);
+                  dispatchModal({ type: EDIT_POST_MODAL });
                   setShowDropDown(!showDropDown);
                 }}
                 className="px-3 py-1 font-medium gap-1 flex flex-row items-center text-green-600 cursor-pointer  hover:bg-green-100 rounded-md text-base w-28  "
@@ -79,13 +74,6 @@ const PostTopSection = (props) => {
           </span>
         )}
       </div>
-      <Modal
-        title={<PostModalTitle />}
-        isOpen={showEditPostModal}
-        onClose={editPostBtnHandler}
-      >
-        <EditPostFrom {...props} />
-      </Modal>
     </>
   );
 };

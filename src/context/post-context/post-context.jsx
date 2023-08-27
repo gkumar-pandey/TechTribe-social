@@ -43,6 +43,10 @@ export const PostsContextProvider = ({ children }) => {
     search: ""
   });
   const [modal, dispatchModal] = useReducer(modalReducer, modalInitialState);
+  const [editPostFormData, setEditPostFormData] = useState({
+    _id: "",
+    content: ""
+  });
   const { currUser, token } = useAuth();
 
   const filtersHandler = (e) => {
@@ -172,7 +176,9 @@ export const PostsContextProvider = ({ children }) => {
         getBookmarksPosts,
         removeBookmarkPost,
         modal,
-        dispatchModal
+        dispatchModal,
+        editPostFormData,
+        setEditPostFormData
       }}
     >
       {children}

@@ -9,16 +9,25 @@ import {
   RightSideBar,
   LeftSideBar,
   Container,
-  NavigationBar
+  NavigationBar,
+  Modal,
+  PostModalTitle
 } from "../../components";
 import FeedPage from "../feed-page/feed-page";
 import ExplorePage from "../explore-page/explore-page";
 import { SearchPage } from "../search-page/search-page";
+import EditPostFrom from "../../components/Form/PostForm/EditPostFrom";
+import { usePosts } from "../../context";
+import { EDIT_POST_MODAL } from "../../reducer";
 
 const HomePage = () => {
   const location = useLocation();
   const { userId } = useParams();
   const { postId } = useParams();
+  const {
+    modal: { editPost },
+    dispatchModal
+  } = usePosts();
 
   const isFeedPage = location.pathname === "/";
   const isProfilePage = location.pathname === `/profile/${userId}`;
@@ -54,6 +63,13 @@ const HomePage = () => {
           </Grid>
         </div>
       </Container>
+      <Modal
+        isOpen={editPost}
+        title={<PostModalTitle />}
+        onClose={() => dispatchModal({ type: EDIT_POST_MODAL })}
+      >
+        <EditPostFrom />
+      </Modal>
     </div>
   );
 };
