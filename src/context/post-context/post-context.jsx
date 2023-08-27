@@ -23,14 +23,15 @@ import {
 import {
   getAllPostsService,
   likeService,
-  dislikeService
-} from "../../services";
-import {
+  dislikeService,
   bookmarkService,
+  commentService,
   deletePostService,
   getBookmarksService,
-  removeBookmarksService
-} from "../../services/post-service/post-service";
+  removeBookmarksService,
+  editCommentService,
+  deleteCommentService
+} from "../../services";
 import { sortPosts } from "../../utils";
 import { toast } from "react-hot-toast";
 
@@ -144,6 +145,52 @@ export const PostsContextProvider = ({ children }) => {
     }
   };
 
+  const postComment = async (postId, comment) => {
+    try {
+      const { status, data } = await commentService(postId, token, comment);
+
+      if (status === 201) {
+        return data?.comments;
+      }
+    } catch (err) {
+      console.error(err?.message);
+      toast.error(err?.message);
+    }
+  };
+
+  const editComment = async (postId, commentId, commentData) => {
+    try {
+      const { status, data } = await editCommentService(
+        postId,
+        commentId,
+        commentData,
+        token
+      );
+      if (status === 201) {
+        return data.comments;
+      }
+    } catch (err) {
+      console.error(err.message);
+      toast.error(err.message);
+    }
+  };
+
+  const deleteComment = async (postId, commentId) => {
+    try {
+      const { status, data } = await deleteCommentService(
+        postId,
+        commentId,
+        token
+      );
+      if (status === 201) {
+        return data?.comments;
+      }
+    } catch (err) {
+      console.error(err.message);
+      toast.error(err.message);
+    }
+  };
+
   useEffect(() => {
     if (token) {
       getAllPosts();
@@ -178,7 +225,10 @@ export const PostsContextProvider = ({ children }) => {
         modal,
         dispatchModal,
         editPostFormData,
-        setEditPostFormData
+        setEditPostFormData,
+        postComment,
+        editComment,
+        deleteComment
       }}
     >
       {children}

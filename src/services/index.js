@@ -18,7 +18,10 @@ import {
   removeBookmarksService,
   uploadPostService,
   deletePostService,
-  editPostService
+  editPostService,
+  commentService,
+  editCommentService,
+  deleteCommentService
 } from "./post-service/post-service";
 
 export {
@@ -38,5 +41,8 @@ export {
   followService,
   unfollowService,
   deletePostService,
-  editPostService
+  editPostService,
+  commentService,
+  editCommentService,
+  deleteCommentService
 };

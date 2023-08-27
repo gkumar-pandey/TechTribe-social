@@ -7,12 +7,7 @@ import Button from "../../Buttons/Button";
 import { isFollowing } from "../../../utils";
 import { EDIT_PROFILE_MODAL } from "../../../reducer";
 
-const ProfileCoverAndPic = ({
-  profileImage,
-  username,
-  coverImage,
-  editProfileModelHandler
-}) => {
+const ProfileCoverAndPic = ({ profileImage, username, coverImage }) => {
   const { followHandler, unfollowHandler } = useUsers();
   const { currUser } = useAuth();
   const { dispatchModal } = usePosts();
@@ -29,8 +24,12 @@ const ProfileCoverAndPic = ({
 
   return (
     <>
-      <div className="relative  py-1 ">
-        <div className={`h-[15rem] ${!coverImage && "bg-gray-300"} `}>
+      <div className="relative  ">
+        <div
+          className={`h-[15rem] overflow-hidden ${
+            !coverImage && "bg-gray-300"
+          } `}
+        >
           {coverImage && (
             <img
               className="  w-full h-full object-fit"
@@ -114,7 +113,9 @@ const UserProfileDetails = ({
 };
 
 const ProfileDetails = ({ otherUser }) => {
-  const { otherUsersPosts } = useUsers();
+  const {
+    posts: { otherUserPosts }
+  } = usePosts();
 
   const nameOfUser = otherUser?.firstName + " " + otherUser?.lastName;
   const username = otherUser?.username;
@@ -124,7 +125,7 @@ const ProfileDetails = ({ otherUser }) => {
   const followers = otherUser?.followers;
   const followingCount = following?.length;
   const followersCount = followers?.length;
-  const postsCount = otherUsersPosts?.length;
+  const postsCount = otherUserPosts?.length;
 
   return (
     <>

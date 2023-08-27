@@ -67,7 +67,7 @@ const ProfilePage = () => {
   return (
     <div>
       {!isLoadingUserDetails && otherUser ? (
-        <div className="bg-white  shadow-md">
+        <div className="bg-white  shadow-md rounded-md overflow-hidden ">
           <ProfileDetails
             otherUser={userId === currUser._id ? currUser : otherUser}
           />
