@@ -16,6 +16,8 @@ import {
   REMOVE_FROM_BOOKMARK,
   SET_ALL_POSTS,
   SET_BOOKMARK_POSTS,
+  modalInitialState,
+  modalReducer,
   postsInitialState
 } from "../../reducer";
 import {
@@ -40,6 +42,7 @@ export const PostsContextProvider = ({ children }) => {
     sortBy: "RECENT",
     search: ""
   });
+  const [modal, dispatchModal] = useReducer(modalReducer, modalInitialState);
   const { currUser, token } = useAuth();
 
   const filtersHandler = (e) => {
@@ -167,7 +170,9 @@ export const PostsContextProvider = ({ children }) => {
         deleteUserPost,
         filtersHandler,
         getBookmarksPosts,
-        removeBookmarkPost
+        removeBookmarkPost,
+        modal,
+        dispatchModal
       }}
     >
       {children}

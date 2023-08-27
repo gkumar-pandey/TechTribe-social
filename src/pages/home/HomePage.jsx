@@ -4,7 +4,13 @@ import { useLocation, useParams } from "react-router-dom";
 import ProfilePage from "../profile/ProfilePage";
 import PostPage from "../post/PostPage";
 import BookmarkPage from "../bookmark/Bookmark";
-import { Grid, RightSideBar, LeftSideBar, Container } from "../../components";
+import {
+  Grid,
+  RightSideBar,
+  LeftSideBar,
+  Container,
+  NavigationBar
+} from "../../components";
 import FeedPage from "../feed-page/feed-page";
 import ExplorePage from "../explore-page/explore-page";
 import { SearchPage } from "../search-page/search-page";
@@ -24,7 +30,7 @@ const HomePage = () => {
   return (
     <div className="bg-slate-50 py-8 min-h-screen ">
       <Container>
-        <div className="px-2 relative">
+        <div className="px-2 sm:px-0 relative">
           <Grid>
             <div>
               <LeftSideBar />

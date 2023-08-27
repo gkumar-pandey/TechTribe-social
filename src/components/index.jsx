@@ -23,6 +23,7 @@ import { ShimmerPosts } from "./Loader/Loader";
 import PostModalTitle from "./Form/PostForm/component/PostModalTitle";
 import { Loader } from "./Loader/Loader";
 import SearchInput from "./Input/SearchInput";
+import NavigationBar from "./Navbar/NavigationBar";
 
 import RequireAuth from "./RequireAuth/RequireAuth";
 export {
@@ -49,5 +50,6 @@ export {
   PostModalTitle,
   Loader,
   SearchInput,
-  RequireAuth
+  RequireAuth,
+  NavigationBar
 };

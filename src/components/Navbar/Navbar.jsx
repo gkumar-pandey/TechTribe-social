@@ -15,7 +15,7 @@ const Navbar = () => {
     <>
       <nav className={styles.nav}>
         <Container>
-          <div className="flex items-center justify-between py-2">
+          <div className="flex items-center justify-between py-2 sm:px-2">
             <div className={styles.logo}>
               <h1>TechTribe</h1>
             </div>

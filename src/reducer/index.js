@@ -7,7 +7,9 @@ import {
 } from "./auth-reducer/auth-reducer";
 import {
   postsInitialState,
-  PostsReducer
+  PostsReducer,
+  modalInitialState,
+  modalReducer
 } from "./post-reducer/post-reducer.jsx";
 import { userInitialState, userReducer } from "./user-reducer/user-reducer";
 
@@ -20,7 +22,9 @@ export {
   PostsReducer,
   userInitialState,
   userReducer,
-  currUserReducer
+  currUserReducer,
+  modalInitialState,
+  modalReducer
 };
 
 export * from "./actions/actions";
