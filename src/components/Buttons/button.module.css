@@ -1,7 +1,7 @@
 .solid_btn {
-  @apply bg-green-700 hover:bg-green-600 text-white font-medium  text-lg py-1 border-none px-3 rounded cursor-pointer my-2;
+  @apply bg-[color:var(--solid-btn-color)] hover:bg-[color:var(--hover-color)]  text-white  font-semibold  text-lg py-1 border-none px-3 rounded cursor-pointer my-2;
 }
 
 .outlined_btn {
-  @apply text-green-700 border border-green-700 py-1 px-3 rounded text-lg font-medium hover:text-white hover:bg-green-700 my-2;
+  @apply text-[color:var(--solid-btn-color)]  border border-[color:var(--solid-btn-color)] font-semibold py-1 px-3 rounded text-lg  hover:bg-[color:var(--solid-btn-color)] hover:text-[color:var(--text-color)]  my-2;
 }

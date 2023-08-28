@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary-color: #2fe48d;
-  --dark-color: #090e14;
-  --secondary-dark-color: #181c23;
-  --ternary-dark-color: #10151b;
-  --dark-secondary-text-color: #9ea1ac;
+@layer base {
+  :root {
+    --primary-color: #2fe48d;
+    --dark-color: #090e14;
+    --secondary-dark-color: #181c23;
+    --ternary-dark-color: #10151b;
+    --secondary-text-color: #9ea1ac;
+    --text-color: #ffffff;
+    --input-bg-color: #f3f6f8;
+    --solid-btn-color: #00ddb3;
+    --hover-color: #00c1a2;
+  }
 }

@@ -1,13 +1,30 @@
-.heading {
-  @apply text-3xl font-bold text-center text-green-700;
+.auth_container {
+  @apply bg-green-50 dark:bg-[color:var(--dark-color)];
+}
+
+.title {
+  @apply text-3xl font-bold text-center;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-family: "Raleway", "Ubuntu", sans-serif;
 }
 .container {
-  @apply flex justify-center items-center bg-slate-50  h-screen;
+  @apply h-screen;
+  display: grid;
+  grid-template-columns: 4fr 3fr;
 }
 .wrapper {
-  @apply border bg-white border-gray-300 shadow-xl py-5 px-8 rounded w-full max-w-[25rem];
+  @apply border bg-white dark:bg-[color:var(--secondary-dark-color)] dark:text-white border-gray-300 dark:border-[color:var(--primary-color)] shadow-xl py-5 px-8 rounded-lg w-full max-w-[25rem];
 }
 
 .text {
-  @apply text-lg text-gray-600  text-center;
+  @apply text-lg text-center;
+  font-family: "ubuntu", sans-serif;
+  color: var(--secondary-text-color);
+}
+
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
 }

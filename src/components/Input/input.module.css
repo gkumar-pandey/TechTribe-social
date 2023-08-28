@@ -1,12 +1,12 @@
 .input {
-  @apply py-1 px-2 text-lg focus:outline-none border border-gray-900 rounded my-1;
+  @apply py-1 px-2 text-lg border-slate-500 focus:outline-none border bg-[color:var(--input-bg-color)] dark:text-gray-900  rounded my-1;
 }
 .password {
-  @apply py-1 px-2 border border-gray-900 rounded overflow-hidden my-1 flex justify-between;
+  @apply py-1 px-2 bg-[color:var(--input-bg-color)] dark:text-gray-900 border  border-slate-500 rounded overflow-hidden my-1 flex justify-between;
 }
 
 .password_input {
-  @apply text-lg focus:outline-none w-full;
+  @apply text-lg dark:text-gray-900 focus:outline-none w-full bg-[color:var(--input-bg-color)];
 }
 
 .search {
