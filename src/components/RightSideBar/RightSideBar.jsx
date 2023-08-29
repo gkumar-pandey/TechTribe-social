@@ -19,7 +19,7 @@ const RightSideBar = () => {
 
   return (
     <div className="sm:hidden flex flex-col items-center  w-full xl:w-5/6 sticky top-24 border dark:border-none rounded-md shadow-md bg-white py-4 dark:bg-[color:var(--secondary-dark-color)] ">
-      <div className="text-start w-full px-4 py-2 text-xl font-semibold  text-[color:var(--text-color)]  ">
+      <div className="text-start w-full px-4 py-2 text-xl font-semibold text-[color:var(--text-dark-color)] dark:text-[color:var(--text-color)]">
         <h2>Who to follow</h2>
       </div>
       <div>

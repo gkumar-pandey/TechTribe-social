@@ -5,6 +5,7 @@
 @layer base {
   :root {
     --primary-color: #2fe48d;
+    --primary-light-color: #16a34a;
     --dark-color: #090e14;
     --secondary-dark-color: #181c23;
     --ternary-dark-color: #10151b;
@@ -15,4 +16,12 @@
     --hover-color: #00c1a2;
     --dark-text-color: #181c23;
   }
+}
+
+.solid-btn {
+  @apply bg-[color:var(--primary-light-color)] text-[color:var(--text-color)] hover:opacity-90 dark:bg-[color:var(--primary-color)] dark:text-[color:var(--dark-text-color)];
+}
+
+.outline-btn {
+  @apply text-[color:var(--primary-color)] hover:text-[color:var(--dark-text-color)] border border-[color:var(--solid-btn-color)] hover:bg-[color:var(--primary-color)];
 }

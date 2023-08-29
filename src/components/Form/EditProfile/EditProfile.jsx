@@ -5,10 +5,12 @@ import EditFormInput from "./component/EditFormInput";
 import UpdateProfileAndCover from "./component/UpdateProfileAndCover";
 import styles from "../form.module.css";
 import { Loader } from "../../Loader/Loader";
+import { toast } from "react-hot-toast";
+import { EDIT_PROFILE_MODAL } from "../../../reducer";
 
 const EditProfile = () => {
-  const { currUser, setCurrUser } = useAuth();
-  const { setOtherUser } = useUsers();
+  const { currUser, setCurrUser, token } = useAuth();
+  const { dispatchUser } = useUsers();
   const { dispatchModal } = usePosts();
   const [isUploading, setIsUploading] = useState(false);
   const [editData, setEditData] = useState({
@@ -65,15 +67,18 @@ const EditProfile = () => {
   };
 
   const updateUser = async () => {
-    const token = JSON.parse(localStorage.getItem("user"))?.token;
-    await updateUserProfile(
-      editData,
-      token,
-      setCurrUser,
-      setOtherUser,
-      setIsUploading,
-      dispatchModal
-    );
+    try {
+      const { data, status } = await updateUserProfile(editData, token);
+      const user = data?.user;
+      if (status === 201) {
+        setCurrUser(user);
+        toast.success("Profile updated successfully");
+        dispatchModal({ type: EDIT_PROFILE_MODAL });
+      }
+    } catch (error) {
+      console.error(error.message);
+      toast.error(error.message);
+    }
   };
 
   const inputFields = [

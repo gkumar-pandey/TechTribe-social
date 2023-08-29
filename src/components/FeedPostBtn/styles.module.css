@@ -1,0 +1,11 @@
+.icon {
+  @apply flex items-center gap-1 dark:text-[color:var(--primary-color)] text-[color:var(--primary-light-color)] font-semibold;
+}
+
+.btn {
+  @apply flex flex-col gap-2 rounded-md bg-white dark:bg-[color:var(--secondary-dark-color)] dark:text-[color:var(--text-color)] p-4 my-2 shadow-md w-full  mx-auto;
+}
+
+.btn_text {
+  @apply px-2 py-1 text-lg border border-gray-600 rounded w-full text-start font-thin hover:bg-slate-50 dark:hover:bg-[color:var(--ternary-dark-color)];
+}

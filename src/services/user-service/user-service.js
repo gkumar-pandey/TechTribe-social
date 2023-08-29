@@ -52,38 +52,14 @@ export const unfollowService = async (followUserId, token) => {
   );
 };
 
-export const updateUserProfile = async (
-  userData,
-  token,
-  setCurrUser,
-  setOtherUser,
-  setIsUploading,
-  dispatchModal
-) => {
-  setIsUploading(true);
-  try {
-    const res = await axios.post(
-      `/api/users/edit`,
-      { userData },
-      {
-        headers: {
-          authorization: token
-        }
+export const updateUserProfile = async (userData, token) => {
+  return await axios.post(
+    `/api/users/edit`,
+    { userData },
+    {
+      headers: {
+        authorization: token
       }
-    );
-    if (res?.status === 201) {
-      setCurrUser(res?.data?.user);
-      setOtherUser(res?.data?.user);
-      toast.success("profile updated successfully");
-      setIsUploading(false);
-      dispatchModal({ type: EDIT_PROFILE_MODAL });
-    } else {
-      toast.error("Something went wrong!");
-      console.error("Something went wrong");
-      setIsUploading(false);
     }
-  } catch (error) {
-    console.log(error);
-    setIsUploading(false);
-  }
+  );
 };
