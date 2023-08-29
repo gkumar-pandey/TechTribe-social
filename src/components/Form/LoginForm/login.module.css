@@ -7,7 +7,7 @@
 }
 
 .bold_text {
-  @apply mx-1 cursor-pointer  text-green-700 hover:text-green-600 font-bold text-lg;
+  @apply mx-1 cursor-pointer text-[color:var(--primary-color)] font-bold text-lg;
 }
 
 .input {

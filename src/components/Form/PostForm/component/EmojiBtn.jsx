@@ -6,7 +6,7 @@ const EmojiBtn = ({ onClick }) => {
     <>
       <div
         onClick={onClick}
-        className="flex items-center gap-1 text-green-700 font-semibold "
+        className="flex items-center gap-1 text-[color:var(--primary-color)] font-semibold "
       >
         <AddReactionOutlinedIcon />
       </div>

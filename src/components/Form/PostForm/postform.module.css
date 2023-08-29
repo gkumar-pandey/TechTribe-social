@@ -1,7 +1,7 @@
 .btn {
-  @apply bg-green-700 w-28 text-white px-2 py-1 font-semibold text-lg rounded;
+  @apply bg-[color:var(--primary-color)] text-[color:var(--dark-text-color)] w-28 px-2 py-1 font-semibold text-lg rounded;
 }
 
 .cancel_btn {
-  @apply border border-green-700 hover:bg-green-700 text-lg hover:text-white w-28 text-green-700 px-2 py-1 font-semibold rounded;
+  @apply border border-[color:var(--primary-color)]  hover:bg-[color:var(--primary-color)] text-lg hover:text-[color:var(--dark-text-color)] w-28 text-[color:var(--primary-color)] px-2 py-1 font-semibold rounded;
 }

@@ -141,7 +141,7 @@ const PostForm = ({ closeModal }) => {
                 )}
               </div>
             </div>
-            <div className="flex items-center flow-row gap-3">
+            <div className="flex items-center flow-row gap-3  ">
               <button
                 type="button"
                 onClick={() => closeModal()}

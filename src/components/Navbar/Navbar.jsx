@@ -20,7 +20,6 @@ const Navbar = () => {
               <h1>TechTribe</h1>
             </div>
             <div className="flex items-center">
-              <BsFillSunFill className=" text-3xl mx-5 " />
               <Link to={`/profile/${currUser?._id}`}>
                 <Avatar
                   image={currUser?.profileImage}

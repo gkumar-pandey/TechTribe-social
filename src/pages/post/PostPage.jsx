@@ -3,6 +3,7 @@ import PostDetails from "../../components/Post/PostDetails";
 import { useScrollToTop } from "../../hooks";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { PostsShimmerLoader } from "../../components/Loader/Loader";
 
 const PostPage = () => {
   const [postDetails, setPostDetails] = useState("");
@@ -25,7 +26,18 @@ const PostPage = () => {
   }, []);
   return (
     <div>
-      <PostDetails postDetails={postDetails} setPostDetails={setPostDetails} />
+      {postDetails ? (
+        <>
+          <PostDetails
+            postDetails={postDetails}
+            setPostDetails={setPostDetails}
+          />
+        </>
+      ) : (
+        <>
+          <PostsShimmerLoader />
+        </>
+      )}
     </div>
   );
 };

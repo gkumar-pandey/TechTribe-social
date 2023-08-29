@@ -67,15 +67,15 @@ const ProfilePage = () => {
   return (
     <div>
       {!isLoadingUserDetails && otherUser ? (
-        <div className="bg-white  shadow-md rounded-md overflow-hidden ">
+        <div className="bg-white dark:text-[color:var(--text-color)] dark:bg-[color:var(--secondary-dark-color)] shadow-md rounded-md overflow-hidden ">
           <ProfileDetails
             otherUser={userId === currUser._id ? currUser : otherUser}
           />
-          <Tabs>
+          {/* <Tabs>
             <h2>Posts</h2>
             <h2>Likes</h2>
             <h2>Replies</h2>
-          </Tabs>
+          </Tabs> */}
         </div>
       ) : (
         <ProfileDetailsShimmer />

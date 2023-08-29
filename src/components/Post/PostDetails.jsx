@@ -25,7 +25,9 @@ const PostDetailsTopSection = ({
         <Avatar image={profileImage} />
         <div className="text-justify">
           <p className="text-md font-semibold">{firstName + " " + lastName}</p>
-          <p className="text-sm text-gray-700 ">{username}</p>
+          <p className="text-sm text-[color:var(--silent-text-color)] ">
+            {username}
+          </p>
         </div>
       </div>
     </>
@@ -112,7 +114,7 @@ const CommentSection = ({ postId, setPostDetails, comments }) => {
         <input
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          className=" text-lg h-30  w-full focus:outline-none px-2 py-1 "
+          className=" text-lg h-30 bg-[color:var(--secondary-dark-color)]  w-full focus:outline-none px-2 py-1 "
           placeholder="Post your reply!"
         />
         <button
@@ -161,7 +163,7 @@ const PostDetails = ({ postDetails, setPostDetails }) => {
     }
   };
   return (
-    <div className="p-4 bg-white rounded-md shadow-md ">
+    <div className="p-4 bg-white dark:bg-[color:var(--secondary-dark-color)] dark:text-[color:var(--text-color)] rounded-md shadow-md ">
       <PostDetailsTopSection {...postDetails} />
       <PostContent {...postDetails} />
       {postDetails.mediaUrl && <PostMedia {...postDetails} />}

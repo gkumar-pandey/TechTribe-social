@@ -3,6 +3,7 @@ import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternate
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import { usePosts } from "../../context";
 import { POST_MODAL } from "../../reducer";
+import styles from "./styles.module.css";
 
 const FeedPostBtn = ({ user }) => {
   const { dispatchModal } = usePosts();
@@ -10,23 +11,20 @@ const FeedPostBtn = ({ user }) => {
     <>
       <button
         onClick={() => dispatchModal({ type: POST_MODAL })}
-        className=" flex flex-col gap-2 rounded-md bg-white p-4 my-2 shadow-md w-full  mx-auto "
+        className={styles.btn}
       >
         <div className="flex flex-row gap-1 items-center  w-full ">
           <span>
             <Avatar image={user?.profileImage} alt={user?.firstName} />
           </span>
-
-          <div className="px-2 py-1 text-lg border border-gray-600 rounded w-full text-start font-thin hover:bg-slate-50 ">
-            What's happening ?
-          </div>
+          <div className={styles.btn_text}>What's happening ?</div>
         </div>
-        <div className="flex  items-center gap-3 my-1 ">
-          <div className="flex items-center gap-1 text-green-700 font-semibold ">
+        <div className="flex items-center gap-3 my-1">
+          <div className={styles.icon}>
             <AddReactionOutlinedIcon />
             <span>Reaction</span>
           </div>
-          <div className="flex items-center gap-1 text-green-700 font-semibold ">
+          <div className={styles.icon}>
             <AddPhotoAlternateOutlinedIcon />
             <span>Photo or GIFs</span>
           </div>

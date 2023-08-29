@@ -14,12 +14,12 @@ const Modal = ({ children, onClose, isOpen, title }) => {
           className="fixed inset-0 bg-black opacity-30"
           onClick={onClose}
         ></div>
-        <div className="bg-white rounded-lg p-4 z-10 max-w-[40rem] w-full mx-1">
+        <div className="bg-white dark:bg-[color:var(--secondary-dark-color)] dark:text-[color:var(--text-color)] rounded-lg p-4 z-10 max-w-[40rem] w-full mx-1">
           <div className=" flex justify-between items-center ">
             <h2 className="text-lg font-extrabold ">{title}</h2>
-            <p className=" hover:bg-slate-100 rounded-full p-2 ">
+            <p className=" hover:bg-slate-100 rounded-full p-2 dark:hover:bg-[color:var(--dark-color)] ">
               <ClearOutlinedIcon
-                className="text-2xl font-bold cursor-pointer  "
+                className="text-2xl font-bold cursor-pointer"
                 onClick={onClose}
               />
             </p>

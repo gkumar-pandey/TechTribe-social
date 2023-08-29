@@ -15,20 +15,22 @@ const NavigationBar = () => {
   const pathname = location.pathname;
 
   return (
-    <aside className=" md:hidden xl:hidden sticky bottom-0 left-0 z-40 flex shadow-lg border items-center justify-between bg-white p-2 rounded-md ">
+    <aside className=" md:hidden xl:hidden sticky bottom-1 left-0 z-40 flex shadow-lg border items-center justify-between bg-white p-2 rounded-md dark:border-none dark:text-[color:var(--text-color)] dark:bg-[color:var(--secondary-dark-color)] ">
       <button
         onClick={() => {
           navigate("/");
         }}
         className={`${
-          pathname === "/" && "bg-green-200 text-green-700"
+          pathname === "/" &&
+          "dark:bg-[color:var(--ternary-dark-color)] text-[color:var(--primary-color)]"
         } p-2 rounded `}
       >
         <HomeIcon sx={{ fontSize: "2rem" }} />
       </button>
       <button
         className={`${
-          pathname === "/explore" && "bg-green-200 text-green-700"
+          pathname === "/explore" &&
+          "dark:bg-[color:var(--ternary-dark-color)] text-[color:var(--primary-color)]"
         } p-2 rounded`}
         onClick={() => {
           navigate("/explore");
@@ -36,12 +38,13 @@ const NavigationBar = () => {
       >
         <ExploreIcon sx={{ fontSize: "2rem" }} />
       </button>
-      <button onClick={() => dispatchModal({ type: POST_MODAL })}>
+      <button
+        className="border-2 rounded-md p-1 border-gray-800 dark:text-[color:var(--primary-color)] dark:border-[color:var(--primary-color)]  "
+        onClick={() => dispatchModal({ type: POST_MODAL })}
+      >
         <AddIcon
           sx={{
-            fontSize: "1.8rem",
-            border: "2px solid black",
-            borderRadius: "4px"
+            fontSize: "1.8rem"
           }}
         />
       </button>
@@ -50,7 +53,8 @@ const NavigationBar = () => {
           navigate("/search");
         }}
         className={`${
-          pathname === "/search" && "bg-green-200 text-green-700"
+          pathname === "/search" &&
+          "dark:bg-[color:var(--ternary-dark-color)] text-[color:var(--primary-color)]"
         } p-2 rounded `}
       >
         <SearchIcon sx={{ fontSize: "2rem" }} />
@@ -60,7 +64,8 @@ const NavigationBar = () => {
           navigate("/bookmarks");
         }}
         className={`${
-          pathname === "/bookmarks" && "bg-green-200 text-green-700"
+          pathname === "/bookmarks" &&
+          "dark:bg-[color:var(--ternary-dark-color)] text-[color:var(--primary-color)]"
         } p-2 rounded`}
       >
         <BookmarkIcon sx={{ fontSize: "2rem" }} />

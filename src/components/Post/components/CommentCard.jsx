@@ -45,10 +45,10 @@ const CommentCard = ({
 
   return (
     <>
-      <div className="p-2 border my-4">
+      <div className="p-2 border my-4 dark:bg-[color:var(--ternary-dark-color)] dark:border-none rounded-md ">
         <div className="flex gap-1">
           <Avatar image={profileImage} alt={username} />
-          <div className=" w-full ">
+          <div className="w-full ">
             <div className="flex items-start justify-between">
               <span>
                 <span className={styles.full_name}>{fullName}</span>

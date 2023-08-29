@@ -44,8 +44,8 @@ export const SearchPage = () => {
   };
 
   return (
-    <div className=" bg-white min-h-screen ">
-      <div className=" text-2xl font-bold text-center text-green-700 p-4 ">
+    <div className="bg-white min-h-screen dark:bg-[color:var(--dark-color)] ">
+      <div className="text-3xl font-bold text-center p-4 text-[color:var(--primary-color)] ">
         <h2>Search your friends</h2>
       </div>
       <div className="p-2">
@@ -60,14 +60,14 @@ export const SearchPage = () => {
       ) : (
         <>
           {isLoading && inputValue ? (
-            <div className="mx-auto flex items-center justify-center py-4 gap-4 text-xl font-semibold text-gray-800 ">
+            <div className="mx-auto flex items-center justify-center py-4 gap-4 text-xl font-semibold text-[color:var(--silent-text-color)] ">
               <Loader /> <span>Searching for "{inputValue}"</span>
             </div>
           ) : (
             <div className="w-3/4 m-auto">
               <>
                 {users.length === 0 ? (
-                  <div className="mx-auto flex items-center justify-center py-4 gap-4 text-xl font-semibold text-gray-800">
+                  <div className="mx-auto flex items-center justify-center py-4 gap-4 text-xl font-semibold text-[color:var(--silent-text-color)]">
                     No result found with "{inputValue}"
                   </div>
                 ) : (

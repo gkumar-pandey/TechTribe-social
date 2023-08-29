@@ -5,7 +5,7 @@ const UploadPhotoBtn = ({ uploadPostImage }) => {
   return (
     <>
       <label className=" flex items-center cursor-pointer ">
-        <AddPhotoAlternateOutlinedIcon className="text-green-700 font-semibold " />
+        <AddPhotoAlternateOutlinedIcon className="text-[color:var(--primary-color)] font-semibold " />
         <input
           type="file"
           onChange={uploadPostImage}

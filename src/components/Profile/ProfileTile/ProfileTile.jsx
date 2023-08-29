@@ -1,15 +1,16 @@
 import React from "react";
 import Avatar from "../../Avatar/Avatar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth, useUsers } from "../../../context";
 import { isFollowing } from "../../../utils";
+import styles from "./styles.module.css";
 
 const FollowBtn = ({ onClickHandler, isFollowingCurrUser }) => {
   return (
     <button
       type="button"
       onClick={onClickHandler}
-      className=" bg-green-700 text-white ml-2 rounded py-1 px-3  "
+      className={`${styles.follow_btn} solid-btn `}
     >
       {isFollowingCurrUser ? "Unfollow" : "Follow"}
     </button>
@@ -29,8 +30,8 @@ const ProfileTile = ({ profileImage, firstName, lastName, username, _id }) => {
   };
 
   return (
-    <div className="flex items-center justify-between hover:bg-slate-100 m-2 p-2 border rounded-md">
-      <div className=" overflow-hidden line-clamp-1 ">
+    <div className="flex items-center justify-between dark:text-[color:var(--text-color)] hover:bg-slate-100 m-2 p-2 border dark:hover:bg-[color:var(--ternary-dark-color)] dark:border-none rounded-md">
+      <div className="overflow-hidden line-clamp-1 ">
         <Link to={`/profile/${_id}`}>
           <div className="flex items-center gap-2">
             <Avatar image={profileImage} />
@@ -38,7 +39,9 @@ const ProfileTile = ({ profileImage, firstName, lastName, username, _id }) => {
               <p className="font-semibold text-sm line-clamp-1 ">
                 {firstName + " " + lastName}
               </p>
-              <p className="text-sm text-slate-600 line-clamp-1">{username}</p>
+              <p className="text-sm line-clamp-1 dark:text-[color:var(--silent-text-color)] ">
+                {username}
+              </p>
             </div>
           </div>
         </Link>
