@@ -17,7 +17,7 @@ const BookmarkPage = () => {
 
   return (
     <div>
-      <div className=" text-2xl font-bold text-green-700 text-center p-2 my-1 ">
+      <div className=" text-3xl font-bold text-[color:var(--primary-color)] text-center p-2 my-1 ">
         <h1>Your Bookmarks </h1>
       </div>
       {isLoading ? (
@@ -26,7 +26,7 @@ const BookmarkPage = () => {
         <>
           {bookmarks?.length === 0 ? (
             <div>
-              <h2 className=" text-center text-xl text-gray-700 font-bold ">
+              <h2 className=" text-center text-xl font-bold text-[color:var(--silent-text-color)] ">
                 No Bookmark to show
               </h2>
             </div>

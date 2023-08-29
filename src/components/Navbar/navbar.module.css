@@ -1,10 +1,13 @@
 .nav {
-  @apply shadow-lg border-b border-gray-100 sticky top-0 z-50 backdrop-blur-md;
-  /* background-color: var(--dark-color); */
+  @apply shadow-lg  dark:bg-[color:var(--dark-color)] sticky top-0 z-50 backdrop-blur-md;
 }
 .logo {
   @apply text-4xl font-extrabold p-1;
   font-family: "Pacifico", cursive, sans-serif;
   font-weight: 700;
   color: var(--primary-color);
+}
+
+.nav-btn {
+  @apply dark:bg-[color:var(--ternary-dark-color)] text-[color:var(--primary-color)];
 }

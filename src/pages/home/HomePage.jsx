@@ -37,7 +37,7 @@ const HomePage = () => {
   const isPostPage = location.pathname === `/post/${postId}`;
 
   return (
-    <div className="bg-slate-50 py-8 min-h-screen ">
+    <div className="bg-slate-50 dark:bg-[color:var(--dark-color)] py-8 min-h-screen">
       <Container>
         <div className="px-2 sm:px-0 relative">
           <Grid>

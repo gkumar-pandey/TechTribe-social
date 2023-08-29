@@ -11,7 +11,9 @@ const SortComp = () => {
   return (
     <div className="flex w-full mx-auto p-2 ">
       <div className="flex items-center gap-4 ">
-        <h2 className="text-md font-medium">Sort By : </h2>
+        <h2 className="text-md text-[color:var(--primary-color)] font-semibold ">
+          Sort By :{" "}
+        </h2>
         <div>
           <select
             onChange={filtersHandler}

@@ -32,19 +32,21 @@ const PostTopSection = (props) => {
               {firstName + " " + lastName}
             </span>
           </Link>
-          <span className="text-sm text-gray-700">@{username}</span>
+          <span className="text-sm text-[color:var(--silent-text-color)]">
+            @{username}
+          </span>
         </span>
 
         {isAuthorizedUser && (
           <span className="relative ">
             <div
               onClick={() => setShowDropDown(!showDropDown)}
-              className="p-2 hover:bg-green-100 hover:text-green-800 cursor-pointer rounded-full "
+              className="p-2 hover:bg-green-100 dark:hover:bg-[color:var(--ternary-dark-color)]   cursor-pointer rounded-full "
             >
               <BsThreeDots className={styles.icon} />
             </div>
             <div
-              className={`absolute top-8 right-3 flex flex-col gap-1 border border-gray-300 bg-white shadow-lg rounded-md p-2 ${
+              className={`absolute top-8 right-3 flex flex-col gap-1 border border-gray-300 bg-white shadow-lg rounded-md p-2 dark:border-none dark:bg-[color:var(--ternary-dark-color)] ${
                 showDropDown ? "visible" : "hidden"
               } `}
             >
@@ -54,13 +56,13 @@ const PostTopSection = (props) => {
                   dispatchModal({ type: EDIT_POST_MODAL });
                   setShowDropDown(!showDropDown);
                 }}
-                className="px-3 py-1 font-medium gap-1 flex flex-row items-center text-green-600 cursor-pointer  hover:bg-green-100 rounded-md text-base w-28  "
+                className="px-3 py-1 font-medium gap-1 flex flex-row items-center text-[color:var(--primary-color)] cursor-pointer  hover:bg-green-100 dark:hover:bg-[color:var(--secondary-dark-color)] rounded-md text-base w-28  "
               >
                 <EditIcon /> Edit
               </button>
               <button
                 onClick={deleteBtnHandler}
-                className="py-1 px-3 gap-1 font-medium  flex flex-row items-center hover:bg-red-100 text-red-600 cursor-pointer   rounded-md text-base"
+                className="py-1 px-3 gap-1 font-medium  flex flex-row items-center hover:bg-red-100 text-red-600 dark:text-red-500 cursor-pointer   rounded-md text-base"
               >
                 {isLoadingDeletePost ? (
                   <Loader />

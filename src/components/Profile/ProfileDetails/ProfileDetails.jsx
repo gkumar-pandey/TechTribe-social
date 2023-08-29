@@ -24,7 +24,7 @@ const ProfileCoverAndPic = ({ profileImage, username, coverImage }) => {
 
   return (
     <>
-      <div className="relative  ">
+      <div className="relative">
         <div
           className={`h-[15rem] overflow-hidden ${
             !coverImage && "bg-gray-300"
@@ -32,13 +32,13 @@ const ProfileCoverAndPic = ({ profileImage, username, coverImage }) => {
         >
           {coverImage && (
             <img
-              className="  w-full h-full object-fit"
+              className="w-full h-full object-fit"
               src={coverImage}
               alt="cover-img"
             />
           )}
         </div>
-        <div className=" w-full   p-4 flex justify-end ">
+        <div className="w-full p-4 flex justify-end">
           <div className=" absolute left-3 top-1/2  border-4 border-slate-50 rounded-full  ">
             <Avatar size={"xl"} image={profileImage} alt={username} />
           </div>
@@ -56,9 +56,11 @@ const ProfileCoverAndPic = ({ profileImage, username, coverImage }) => {
                   {onHover ? "Unfollow" : "Following"}
                 </Button>
               ) : (
-                <Button BtnType={"solid"} onClick={followBtnHandler}>
-                  Follow
-                </Button>
+                <div className="">
+                  <Button BtnType={"solid"} onClick={followBtnHandler}>
+                    Follow
+                  </Button>
+                </div>
               )}
             </>
           )}
@@ -78,10 +80,12 @@ const UserProfileDetails = ({
   postsCount
 }) => {
   return (
-    <div className="px-4">
+    <div className="px-4  ">
       <div>
         <p className="text-xl font-extrabold">{nameOfUser}</p>
-        <p className="text-md text-slate-700 ">@{username}</p>
+        <p className="text-md text-[color:var(--silent-text-color)] ">
+          @{username}
+        </p>
       </div>
       <div className=" py-1">
         <div>

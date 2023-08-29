@@ -7,7 +7,7 @@
 }
 
 .post_container {
-  @apply p-4 rounded-md my-1 border shadow-lg bg-white w-full  mx-auto;
+  @apply p-4 rounded-md my-1 border shadow-lg bg-white dark:border-none dark:bg-[color:var(--secondary-dark-color)] w-full dark:text-[color:var(--text-color)]  mx-auto;
 }
 
 .icon_container {
@@ -19,7 +19,7 @@
 }
 
 .username {
-  @apply text-sm text-gray-700;
+  @apply text-sm text-[color:var(--silent-text-color)];
 }
 
 .full_name {

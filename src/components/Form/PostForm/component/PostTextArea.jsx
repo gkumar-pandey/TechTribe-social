@@ -5,7 +5,7 @@ const PostTextArea = ({ mediaUrl, onChangeHandler, value }) => {
     <>
       <textarea
         placeholder="What's happening"
-        className=" text-xl w-full p-2 border-none focus:outline-none "
+        className="text-xl w-full p-2 border-none dark:bg-[color:var(--secondary-dark-color)] focus:outline-none "
         rows={mediaUrl ? "2" : "6"}
         name="content"
         onChange={onChangeHandler}

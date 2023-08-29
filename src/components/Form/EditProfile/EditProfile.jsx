@@ -3,7 +3,8 @@ import { useAuth, usePosts, useUsers } from "../../../context";
 import { updateUserProfile } from "../../../services";
 import EditFormInput from "./component/EditFormInput";
 import UpdateProfileAndCover from "./component/UpdateProfileAndCover";
-import styles from "./editform.module.css";
+import styles from "../form.module.css";
+import { Loader } from "../../Loader/Loader";
 
 const EditProfile = () => {
   const { currUser, setCurrUser } = useAuth();
@@ -103,13 +104,16 @@ const EditProfile = () => {
             key={idx}
           />
         ))}
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end mt-4 gap-4 ">
+          <button type="button" className={`${styles.cancel_btn}`}>
+            cancel
+          </button>
           <button
             type="button"
             className={`${styles.save_btn}`}
             onClick={updateUser}
           >
-            {isUploading ? "uploading.." : "Save"}
+            {isUploading ? <Loader /> : "Save"}
           </button>
         </div>
       </div>

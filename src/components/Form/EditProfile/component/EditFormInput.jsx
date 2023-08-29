@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../editform.module.css";
+import styles from "../../form.module.css";
 
 const EditFormInput = ({ label, placeholder, name, value, onChange }) => {
   return (

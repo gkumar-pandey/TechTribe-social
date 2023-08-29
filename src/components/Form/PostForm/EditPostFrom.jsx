@@ -51,7 +51,7 @@ const EditPostFrom = () => {
                 placeholder="What's happening"
                 className={`text-xl ${
                   editPostFormData?.mediaUrl ? "w-1/2" : "w-full"
-                } sm:w-full min-h-[18rem] sm:min-h-full p-2 focus:outline-none `}
+                } sm:w-full min-h-[18rem] sm:min-h-full p-2 focus:outline-none dark:bg-[color:var(--secondary-dark-color)] `}
                 value={editPostFormData?.content}
                 name="content"
                 onChange={onChangeHandler}
@@ -67,12 +67,12 @@ const EditPostFrom = () => {
             <div className="flex items-center justify-between py-2 ">
               <div>
                 <div className="flex  items-center gap-4 my-1">
-                  <div className="flex items-center gap-1 text-green-700 font-semibold">
+                  <div className="flex items-center gap-1 cursor-pointer text-[color:var(--primary-color)] font-semibold">
                     <AddReactionOutlinedIcon />
                   </div>
                   <div>
                     <label className="flex items-center cursor-pointer">
-                      <AddPhotoAlternateOutlinedIcon className="text-green-700 font-semibold" />
+                      <AddPhotoAlternateOutlinedIcon className="text-[color:var(--primary-color)] font-semibold" />
                       <input
                         type="file"
                         accept="image/*"

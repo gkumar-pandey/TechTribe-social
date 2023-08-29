@@ -1,0 +1,11 @@
+.save_btn {
+  @apply bg-[color:var(--primary-color)] text-[color:var(--dark-text-color)] w-28 px-2 py-1 font-semibold text-lg rounded hover:opacity-90;
+}
+
+.cancel_btn {
+  @apply border border-[color:var(--primary-color)]  hover:bg-[color:var(--primary-color)] text-lg hover:text-[color:var(--dark-text-color)] w-28 text-[color:var(--primary-color)] px-2 py-1 font-semibold rounded;
+}
+
+.input {
+  @apply px-2 py-1 focus:outline-none border text-[color:var(--dark-text-color)] border-gray-700 rounded;
+}
