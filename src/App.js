@@ -25,10 +25,38 @@ function App() {
         </RequireAuth>
       )
     },
-    { path: "/bookmarks", element: <HomePage /> },
-    { path: "/profile/:userId", element: <HomePage /> },
-    { path: "/search", element: <HomePage /> },
-    { path: "/post/:postId", element: <HomePage /> }
+    {
+      path: "/bookmarks",
+      element: (
+        <RequireAuth>
+          <HomePage />
+        </RequireAuth>
+      )
+    },
+    {
+      path: "/profile/:userId",
+      element: (
+        <RequireAuth>
+          <HomePage />
+        </RequireAuth>
+      )
+    },
+    {
+      path: "/search",
+      element: (
+        <RequireAuth>
+          <HomePage />
+        </RequireAuth>
+      )
+    },
+    {
+      path: "/post/:postId",
+      element: (
+        <RequireAuth>
+          <HomePage />
+        </RequireAuth>
+      )
+    }
   ];
 
   return (
