@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAuth, usePosts, useUsers } from "../../../context";
+import { useAuth, usePosts } from "../../../context";
 import { updateUserProfile } from "../../../services";
 import EditFormInput from "./component/EditFormInput";
 import UpdateProfileAndCover from "./component/UpdateProfileAndCover";
@@ -10,7 +10,6 @@ import { EDIT_PROFILE_MODAL } from "../../../reducer";
 
 const EditProfile = () => {
   const { currUser, setCurrUser, token } = useAuth();
-  const { dispatchUser } = useUsers();
   const { dispatchModal } = usePosts();
   const [isUploading, setIsUploading] = useState(false);
   const [editData, setEditData] = useState({
