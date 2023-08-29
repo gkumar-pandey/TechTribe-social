@@ -9,7 +9,7 @@ import { EDIT_PROFILE_MODAL } from "../../../reducer";
 
 const ProfileCoverAndPic = ({ profileImage, username, coverImage }) => {
   const { followHandler, unfollowHandler } = useUsers();
-  const { currUser } = useAuth();
+  const { currUser, logoutHandler } = useAuth();
   const { dispatchModal } = usePosts();
   const [onHover, setOnHover] = useState(false);
   const { userId } = useParams();
@@ -43,12 +43,20 @@ const ProfileCoverAndPic = ({ profileImage, username, coverImage }) => {
             <Avatar size={"xl"} image={profileImage} alt={username} />
           </div>
           {currUser._id === userId ? (
-            <Button
-              onClick={() => dispatchModal({ type: EDIT_PROFILE_MODAL })}
-              BtnType={"outlined"}
-            >
-              Edit profile
-            </Button>
+            <div className=" flex flex-row sm:flex-col items-center gap-2 flex-wrap ">
+              <button
+                onClick={logoutHandler}
+                className=" w-24 px-3 py-1 bg-red-600 font-semibold text-lg rounded "
+              >
+                Logout
+              </button>
+              <Button
+                onClick={() => dispatchModal({ type: EDIT_PROFILE_MODAL })}
+                BtnType={"outlined"}
+              >
+                Edit profile
+              </Button>
+            </div>
           ) : (
             <>
               {isFollowing(currUser?.following, userId) ? (

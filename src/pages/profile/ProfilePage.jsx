@@ -5,7 +5,6 @@ import {
   Post,
   EditProfile,
   Modal,
-  Tabs,
   ProfileDetails,
   ProfileDetailsShimmer,
   ShimmerPosts
@@ -71,11 +70,6 @@ const ProfilePage = () => {
           <ProfileDetails
             otherUser={userId === currUser._id ? currUser : otherUser}
           />
-          {/* <Tabs>
-            <h2>Posts</h2>
-            <h2>Likes</h2>
-            <h2>Replies</h2>
-          </Tabs> */}
         </div>
       ) : (
         <ProfileDetailsShimmer />

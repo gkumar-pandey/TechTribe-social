@@ -50,7 +50,7 @@ const CommentCard = ({
           <Avatar image={profileImage} alt={username} />
           <div className="w-full ">
             <div className="flex items-start justify-between">
-              <span>
+              <span className=" line-clamp-1 ">
                 <span className={styles.full_name}>{fullName}</span>
                 <span className={styles.username}>{username}</span>
               </span>
@@ -67,18 +67,18 @@ const CommentCard = ({
                   type="text"
                   autoFocus
                   value={editCommentData}
-                  className="p-2 border border-t-0 border-l-0 border-r-0 w-full border-b-2 focus:outline-none  "
+                  className="p-2 dark:bg-[color:var(--ternary-dark-color)] border border-t-0 border-l-0 border-r-0 w-full border-b-2 focus:outline-none  "
                   onChange={(e) => setEditCommentData(e.target.value)}
                 />
                 <button
                   onClick={cancelEditBtnHandler}
-                  className="mx-1 cursor-pointer text-red-700 "
+                  className="mx-1 cursor-pointer text-red-500 "
                 >
                   <CancelIcon sx={{ fontSize: "1.8rem" }} />
                 </button>
                 <button
                   onClick={saveBtnHandler}
-                  className=" cursor-pointer text-green-700 "
+                  className=" cursor-pointer text-[color:var(--primary-light-color)] dark:text-[color:var(--primary-color)]  "
                 >
                   <CheckCircleIcon sx={{ fontSize: "1.8rem" }} />
                 </button>

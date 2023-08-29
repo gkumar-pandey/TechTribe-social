@@ -70,7 +70,7 @@ export const SpinLoader = () => {
 
 export const Loader = () => {
   return (
-    <div className="dark:text-[color:var(--primary-color)]">
+    <div className="dark:text-[color:var(--dark-text-color)]">
       <div
         className="inline-block h-4 w-4 mx-auto animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
         role="status"

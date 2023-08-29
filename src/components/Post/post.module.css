@@ -25,3 +25,7 @@
 .full_name {
   @apply font-semibold text-lg hover:underline;
 }
+
+.reply_btn {
+  @apply bg-[color:var(--primary-light-color)] text-[color:var(--text-color)] dark:bg-[color:var(--primary-color)] dark:text-[color:var(--dark-text-color)] w-20   font-semibold py-1 px-3 rounded;
+}
