@@ -246,5 +246,22 @@ export const users = [
     following: [],
     createdAt: formatDate(),
     updatedAt: formatDate()
+  },
+  {
+    _id: "4e343d18-anand_baraik-userId",
+    firstName: "Anand",
+    lastName: "Baraik",
+    username: "baraik_anand",
+    coverImage:
+      "https://res.cloudinary.com/dlykup1dh/image/upload/v1693386921/TechTribe/UsersProfile/anand_coverImg.jpg",
+    profileImage:
+      "https://res.cloudinary.com/dlykup1dh/image/upload/v1693386967/TechTribe/UsersProfile/anand.jpg",
+    bio: "Software Engineer || Upskilling @neogCamp'23 || Documenting/twitting my learning & tech.",
+    link: "https://peerlist.io/anandbaraik",
+    followers: [],
+    bookmarks: [],
+    following: [],
+    createdAt: formatDate(),
+    updatedAt: formatDate()
   }
 ];

@@ -49,8 +49,10 @@ export const posts = [
   },
   {
     _id: "f81085b6-post-3",
-    content: "",
-    mediaUrl: "",
+    content:
+      "Hii Everyone , I've built a e-commerce web app with reactJs \n checkout here ",
+    mediaUrl:
+      "https://res.cloudinary.com/dlykup1dh/image/upload/v1690013228/Project%20Gif/Techgiz_big2ck.gif",
     likes: {
       likeCount: 4,
       likedBy: [],
@@ -63,7 +65,7 @@ export const posts = [
     userId: "6d4b8b1d-gautam-userId",
     profileImage:
       "https://res.cloudinary.com/dlykup1dh/image/upload/v1686728648/TechTribe/UsersProfile/gautamkp078.jpg",
-    createdAt: "2023-07-15T10:48:34+05:30",
+    createdAt: "2023-08-23T10:48:34+05:30",
     updatedAt: formatDate(),
     id: 3
   },
@@ -1084,5 +1086,68 @@ export const posts = [
     profileImage:
       "https://res.cloudinary.com/dlykup1dh/image/upload/v1686728648/TechTribe/UsersProfile/gautamkp078.jpg",
     id: 50
+  },
+  {
+    _id: "2c5e9df2-post-51",
+    content: "Hii everyone built a small project QMail on ReactJs  ",
+    mediaUrl:
+      "https://res.cloudinary.com/dlykup1dh/image/upload/v1683646646/Project%20Gif/Qmailgif.gif",
+    likes: {
+      likeCount: 8,
+      likedBy: [],
+      dislikedBy: []
+    },
+    comments: [],
+    userId: "6d4b8b1d-gautam-userId",
+    firstName: "Gautam",
+    lastName: "Pandey",
+    username: "gautamkp078",
+    createdAt: "2023-08-11T13:21:34+05:30",
+    updatedAt: formatDate(),
+    profileImage:
+      "https://res.cloudinary.com/dlykup1dh/image/upload/v1686728648/TechTribe/UsersProfile/gautamkp078.jpg",
+    id: 51
+  },
+  {
+    _id: "2c5e6df2-post-52",
+    content: "",
+    mediaUrl:
+      "https://res.cloudinary.com/dlykup1dh/image/upload/v1692613626/m2tb324veg7r0ek15v0r.jpg",
+    likes: {
+      likeCount: 3,
+      likedBy: [],
+      dislikedBy: []
+    },
+    comments: [],
+    userId: "4e343d18-anand_baraik-userId",
+    firstName: "Anand",
+    lastName: "Baraik",
+    username: "baraik_anand",
+    createdAt: "2023-08-18T13:21:34+05:30",
+    updatedAt: formatDate(),
+    profileImage:
+      "https://res.cloudinary.com/dlykup1dh/image/upload/v1693386967/TechTribe/UsersProfile/anand.jpg",
+    id: 52
+  },
+  {
+    _id: "2c5e8df2-post-53",
+    content: "Motivation,Inspiration for late night study 🍫",
+    mediaUrl:
+      "https://res.cloudinary.com/dlykup1dh/image/upload/v1693388513/TechTribe/PostsImg/post-21.jpg",
+    likes: {
+      likeCount: 6,
+      likedBy: [],
+      dislikedBy: []
+    },
+    comments: [],
+    userId: "4e343d18-anand_baraik-userId",
+    firstName: "Anand",
+    lastName: "Baraik",
+    username: "baraik_anand",
+    createdAt: "2023-08-19T13:21:34+05:30",
+    updatedAt: formatDate(),
+    profileImage:
+      "https://res.cloudinary.com/dlykup1dh/image/upload/v1693386967/TechTribe/UsersProfile/anand.jpg",
+    id: 53
   }
 ];
