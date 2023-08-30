@@ -16,7 +16,6 @@ const SignUpPage = () => {
             <div className={styles.wrapper}>
               <div className="my-6">
                 <h2 className={styles.title}>Signup TechTribe</h2>
-                <p></p>
               </div>
               <SignUpForm />
               {signupFormData?.validationErr && (

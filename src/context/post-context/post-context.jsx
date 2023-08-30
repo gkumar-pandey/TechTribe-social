@@ -95,7 +95,7 @@ export const PostsContextProvider = ({ children }) => {
   const bookmarkPost = async (postId) => {
     try {
       const { data, status } = await bookmarkService(postId, token);
-      console.log(data);
+
       if (status === 200) {
         dispatchPosts({ type: BOOKMARK_POST, payload: data.bookmarks });
       }

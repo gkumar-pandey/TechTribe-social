@@ -23,19 +23,15 @@ const LikeIcon = ({ likesCount, isLikedByUser, postId }) => {
   return (
     <div
       className={`${styles.icon_container} group `}
-      onMouseEnter={onHoverHandler}
-      onMouseLeave={onHoverHandler}
       onClick={likeDislikeHandler}
     >
-      {hover || isLikedByUser ? (
-        <span
-          className={`p-2 rounded-full ${hover && "group-hover:bg-red-200"} `}
-        >
+      {isLikedByUser ? (
+        <span className={`p-2 rounded-full  "} `}>
           <AiFillHeart className={styles.likedIcon} />
         </span>
       ) : (
-        <span className={styles.likeIcon_wrapper}>
-          <AiOutlineHeart className={styles.icon} />
+        <span>
+          <AiOutlineHeart className="text-xl group-hover:   " />
         </span>
       )}
       <span
@@ -101,10 +97,10 @@ export const BookmarkIconComp = ({ postId }) => {
       onMouseLeave={onHoverHandler}
       onClick={bookmarkBtnHandler}
     >
-      <span className=" p-2 rounded-full group-hover:bg-green-200 group-hover:text-green-800 ">
+      <span className=" p-2 rounded-full group-hover:bg-green-50 dark:group-hover:bg-[color:var(--ternary-dark-color)] group-hover:text-green-600  dark:group-hover:text-[color:var(--primary-color)] ">
         {isBookmarked ? (
           <>
-            <BsFillBookmarkFill className=" text-green-800 " />
+            <BsFillBookmarkFill className="   text-[color:var(--primary-light-color)] dark:text-[color:var(--primary-color)] " />
           </>
         ) : (
           <FaRegBookmark className={styles.icon} />

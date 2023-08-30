@@ -1,16 +1,23 @@
-import { useContext, useEffect, useReducer, useState } from "react";
+import {
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+  createContext
+} from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 import {
   signupReducer,
   loginReducer,
   signupInitialState,
-  loginInitialState
+  loginInitialState,
+  RESET_FORM
 } from "../../reducer";
 import { loginValidation, signupValidation } from "../../utils";
 import { loginService, signupService } from "../../services";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast";
 
-const { createContext } = require("react");
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -51,6 +58,7 @@ export const AuthProvider = ({ children }) => {
           setToken(encodedToken);
           localStorage.setItem("user", JSON.stringify(foundUser));
           localStorage.setItem("token", encodedToken);
+          dispatchLoginForm({ type: RESET_FORM });
           setIsLoading(false);
           navigate("/");
         }

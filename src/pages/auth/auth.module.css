@@ -3,8 +3,7 @@
 }
 
 .title {
-  @apply text-3xl font-bold text-center;
-  color: var(--primary-color);
+  @apply text-3xl font-bold text-center dark:text-[color:var(--primary-color)] text-[color:var(--primary-light-color)];
   font-weight: 700;
   font-family: "Raleway", "Ubuntu", sans-serif;
 }

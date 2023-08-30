@@ -7,9 +7,9 @@
 }
 
 .bold_text {
-  @apply mx-1 cursor-pointer text-[color:var(--primary-color)] font-bold text-lg;
+  @apply mx-1 cursor-pointer text-[color:var(--primary-light-color)] dark:text-[color:var(--primary-color)] font-bold text-lg;
 }
 
 .input {
-  @apply border border-gray-800 px-2 py-1 text-lg w-full focus:outline-none rounded;
+  @apply py-1 px-2 text-lg border-slate-500 focus:outline-none border bg-[color:var(--input-bg-color)] dark:text-gray-900 w-full rounded my-1;
 }
