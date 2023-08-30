@@ -120,9 +120,11 @@ const CommentSection = ({ postId, setPostDetails, comments }) => {
         <button
           onClick={replyBtnHandler}
           disabled={isReplyBtnDisable}
-          className={`bg-green-700 w-20 text-white font-semibold py-1 px-3 rounded ${
-            isReplyBtnDisable ? "opacity-80" : "cursor-pointer"
-          } `}
+          className={`${
+            isReplyBtnDisable
+              ? "opacity-50"
+              : "cursor-pointer hover:opacity-90 "
+          } ${styles.reply_btn} `}
         >
           {isLoading ? <Loader /> : "Reply"}
         </button>

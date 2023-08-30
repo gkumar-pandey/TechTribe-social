@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { usePosts } from "../../context";
 import { Post, PostsShimmerLoader } from "../../components";
 import { useScrollToTop } from "../../hooks";
