@@ -1,6 +1,6 @@
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { LoginPage, SignUpPage, HomePage } from "./pages/index.jsx";
+import { LoginPage, SignUpPage, HomePage, ErrorPage } from "./pages/index.jsx";
 import { Navbar, NavigationBar, RequireAuth } from "./components";
 import { Toaster } from "react-hot-toast";
 
@@ -68,6 +68,7 @@ function App() {
         ))}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Toaster />
       {!isAuthPage && <NavigationBar />}

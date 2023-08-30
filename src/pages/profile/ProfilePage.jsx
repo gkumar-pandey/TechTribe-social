@@ -7,7 +7,7 @@ import {
   Modal,
   ProfileDetails,
   ProfileDetailsShimmer,
-  ShimmerPosts
+  SpinLoader
 } from "../../components";
 import { useAuth, usePosts, useUsers } from "../../context";
 import { useScrollToTop } from "../../hooks";
@@ -76,12 +76,20 @@ const ProfilePage = () => {
       )}
       {!isLoadingUserPosts && !isLoadingUserDetails ? (
         <div className="py-2 ">
-          {otherUserPosts.map((post) => (
-            <Post {...post} key={post._id} />
-          ))}
+          {otherUserPosts.length === 0 ? (
+            <h1 className=" text-xl my-6 text-center text-[color:var(--silent-text-color)] ">
+              No Posts to Show
+            </h1>
+          ) : (
+            <>
+              {otherUserPosts.map((post) => (
+                <Post {...post} key={post._id} />
+              ))}
+            </>
+          )}
         </div>
       ) : (
-        <ShimmerPosts />
+        <SpinLoader />
       )}
 
       <Modal
