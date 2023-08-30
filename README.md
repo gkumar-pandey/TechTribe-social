@@ -1,5 +1,5 @@
 <p align="center" >
-<img src="https://res.cloudinary.com/dlykup1dh/image/upload/v1693400907/TechTribe/techtribe-log.png" width="200px"   >
+<img src="https://res.cloudinary.com/dlykup1dh/image/upload/v1693404075/TechTribe/tech-tribe-logo.gif" width="200px"   >
 </p>
 
 <div align="center" >
