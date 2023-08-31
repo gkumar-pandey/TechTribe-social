@@ -1,41 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart, AiOutlineShareAlt } from "react-icons/ai";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FaRegBookmark, FaRegComment } from "react-icons/fa";
 import styles from "../post.module.css";
+import { usePosts } from "../../../context";
+import { useCopyCurrentLink } from "../../../hooks";
+import { toast } from "react-hot-toast";
 
-import { usePosts } from "../../../context/post-context/post-context";
-import { Link } from "react-router-dom";
-
-const LikeIcon = ({ likesCount, isLikedByUser, postId }) => {
-  const [hover, setHover] = useState(false);
-  const onHoverHandler = () => setHover(!hover);
-  const { likePost, dislikePost } = usePosts();
-
-  const likeDislikeHandler = () => {
-    if (isLikedByUser) {
-      dislikePost(postId);
-    } else {
-      likePost(postId);
-    }
-  };
-
+export const LikeIcon = ({
+  likesCount,
+  isLikedByUser,
+  postId,
+  likeBtnHandler
+}) => {
   return (
     <div
       className={`${styles.icon_container} group `}
-      onMouseEnter={onHoverHandler}
-      onMouseLeave={onHoverHandler}
-      onClick={likeDislikeHandler}
+      onClick={() => likeBtnHandler(postId)}
     >
-      {hover || isLikedByUser ? (
-        <span
-          className={`p-2 rounded-full ${hover && "group-hover:bg-red-200"} `}
-        >
+      {isLikedByUser ? (
+        <span className={`p-1 rounded-full  `}>
           <AiFillHeart className={styles.likedIcon} />
         </span>
       ) : (
-        <span className={styles.likeIcon_wrapper}>
-          <AiOutlineHeart className={styles.icon} />
+        <span className="group-hover:bg-red-50 rounded-full p-1 ">
+          <AiOutlineHeart className="text-xl group-hover:text-red-600 " />
         </span>
       )}
       <span
@@ -49,32 +39,20 @@ const LikeIcon = ({ likesCount, isLikedByUser, postId }) => {
   );
 };
 
-const CommentIcon = ({ commentCount }) => {
-  const [hover, setHover] = useState(false);
-
-  const onHoverHandler = () => {
-    setHover(!hover);
-  };
-
+export const CommentIcon = ({ commentCount }) => {
   return (
     <>
-      <div
-        className={`${styles.icon_container} group `}
-        onMouseEnter={onHoverHandler}
-        onMouseLeave={onHoverHandler}
-      >
-        <span className=" p-2 rounded-full group-hover:bg-green-200 group-hover:text-green-800 ">
+      <div className={`${styles.icon_container} group `}>
+        <span className=" p-1 rounded-full group-hover:bg-green-50 group-hover:text-green-600 ">
           <FaRegComment className={styles.icon} />
         </span>
-        <span className=" group-hover:text-green-800 ">{commentCount}</span>
+        <span className=" group-hover:text-green-600 ">{commentCount}</span>
       </div>
     </>
   );
 };
 
 export const BookmarkIconComp = ({ postId }) => {
-  const [hover, setHover] = useState(false);
-
   const {
     bookmarkPost,
     removeBookmarkPost,
@@ -91,20 +69,15 @@ export const BookmarkIconComp = ({ postId }) => {
     }
   };
 
-  const onHoverHandler = () => {
-    setHover(!hover);
-  };
   return (
     <div
       className={`${styles.icon_container} group `}
-      onMouseEnter={onHoverHandler}
-      onMouseLeave={onHoverHandler}
       onClick={bookmarkBtnHandler}
     >
-      <span className=" p-2 rounded-full group-hover:bg-green-200 group-hover:text-green-800 ">
+      <span className=" p-2 rounded-full group-hover:bg-green-50 dark:group-hover:bg-[color:var(--ternary-dark-color)] group-hover:text-green-600  dark:group-hover:text-[color:var(--primary-color)] ">
         {isBookmarked ? (
           <>
-            <BsFillBookmarkFill className=" text-green-800 " />
+            <BsFillBookmarkFill className="   text-[color:var(--primary-light-color)] dark:text-[color:var(--primary-color)] " />
           </>
         ) : (
           <FaRegBookmark className={styles.icon} />
@@ -114,9 +87,31 @@ export const BookmarkIconComp = ({ postId }) => {
   );
 };
 
+export const ShareIcon = ({ postId }) => {
+  const copyCurrentLink = useCopyCurrentLink();
+
+  return (
+    <div
+      onClick={() => copyCurrentLink(postId)}
+      className=" flex items-center text-xl gap-1 "
+    >
+      <AiOutlineShareAlt className={styles.icon} />
+    </div>
+  );
+};
+
 const PostIcons = ({ likes, comments, _id, isLikedByUser }) => {
+  const { likePost, dislikePost } = usePosts();
   const likesCount = likes?.likeCount ? likes?.likeCount : 0;
   const commentCount = comments?.length;
+
+  const likeBtnHandler = (postId) => {
+    if (isLikedByUser) {
+      dislikePost(postId);
+    } else {
+      likePost(postId);
+    }
+  };
 
   return (
     <div className="flex items-center justify-between py-1">
@@ -125,13 +120,12 @@ const PostIcons = ({ likes, comments, _id, isLikedByUser }) => {
           likesCount={likesCount}
           postId={_id}
           isLikedByUser={isLikedByUser}
+          likeBtnHandler={likeBtnHandler}
         />
         <Link to={`/post/${_id}`}>
           <CommentIcon commentCount={commentCount} />
         </Link>
-        <div className=" flex items-center text-xl gap-1 ">
-          <AiOutlineShareAlt className={styles.icon} />
-        </div>
+        <ShareIcon postId={_id} />
       </div>
       <BookmarkIconComp postId={_id} />
     </div>

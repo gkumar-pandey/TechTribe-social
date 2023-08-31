@@ -11,7 +11,12 @@ import { Loader } from "../Loader/Loader";
 import { recentComments } from "../../utils";
 import { toast } from "react-hot-toast";
 import { dislikeService, likeService } from "../../services";
-import { BookmarkIconComp } from "./components/PostIcons";
+import {
+  BookmarkIconComp,
+  CommentIcon,
+  LikeIcon,
+  ShareIcon
+} from "./components/PostIcons";
 
 const PostDetailsTopSection = ({
   username,
@@ -41,49 +46,23 @@ const PostDetailsLikesSection = ({
   isLiked,
   _id
 }) => {
-  const [onHover, setOnHover] = useState(false);
   const likesCount = likes?.likeCount;
+  const commentCount = comments?.length;
 
   return (
     <>
       <div className=" flex my-2 items-center justify-between py-1 border-l-0 border-r-0 px-1 border border-gray-500 ">
         <div className=" flex items-center gap-5 ">
-          <div
-            onMouseEnter={() => setOnHover(!onHover)}
-            onMouseLeave={() => setOnHover(!onHover)}
-            className=" flex items-center text-xl gap-1 group "
-          >
-            {isLiked || onHover ? (
-              <span
-                onClick={likeBtnHandler}
-                className={`p-2 rounded-full  ${
-                  onHover && "group-hover:bg-red-200"
-                } `}
-              >
-                <AiFillHeart className={styles.likedIcon} />
-              </span>
-            ) : (
-              <span
-                onClick={likeBtnHandler}
-                className={styles.likeIcon_wrapper}
-              >
-                <AiOutlineHeart className={styles.icon} />
-              </span>
-            )}
-            <span>{likesCount}</span>
-          </div>
-
-          <div className=" flex items-center text-xl gap-1 ">
-            <FaRegComment className={styles.icon} />
-            <span>{comments?.length}</span>
-          </div>
-          <div className=" flex items-center text-xl gap-1 ">
-            <AiOutlineShareAlt className={styles.icon} />
-          </div>
+          <LikeIcon
+            likesCount={likesCount}
+            isLikedByUser={isLiked}
+            likeBtnHandler={likeBtnHandler}
+            postId={_id}
+          />
+          <CommentIcon commentCount={commentCount} />
+          <ShareIcon postId={_id} />
         </div>
-        <div>
-          <BookmarkIconComp postId={_id} />
-        </div>
+        <BookmarkIconComp postId={_id} />
       </div>
     </>
   );
