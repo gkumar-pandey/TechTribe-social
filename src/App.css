@@ -23,5 +23,5 @@
 }
 
 .outline-btn {
-  @apply text-[color:var(--primary-color)] hover:text-[color:var(--dark-text-color)] border border-[color:var(--solid-btn-color)] hover:bg-[color:var(--primary-color)];
+  @apply text-[color:var(--primary-light-color)] hover:text-[color:var(--text-color)] border border-[color:var(--primary-light-color)] hover:bg-[color:var(--primary-light-color)] dark:text-[color:var(--primary-color)] dark:hover:text-[color:var(--dark-text-color)] dark:hover:bg-[color:var(--primary-color)] dark:border-[color:var(--primary-color)];
 }

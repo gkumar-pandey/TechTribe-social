@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import PostContent from "./components/PostContent";
 import PostMedia from "./components/PostMedia";
 import Avatar from "../Avatar/Avatar";
-import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
-import { FaRegBookmark, FaRegComment } from "react-icons/fa";
+
 import styles from "./post.module.css";
 import { useAuth, usePosts } from "../../context";
 import CommentCard from "./components/CommentCard";

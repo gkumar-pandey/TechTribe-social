@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import { useAuth, usePosts } from "../../../context";
 import { uploadPostService } from "../../../services";
 import { Loader } from "../../Loader/Loader";
-import styles from "./postform.module.css";
 import {
   EmojiBtn,
   PostMediaComp,
@@ -10,7 +10,7 @@ import {
   UploadPhotoBtn
 } from "./component";
 import Emoji from "../../Emoji/Emoji";
-import { toast } from "react-hot-toast";
+import styles from "./postform.module.css";
 import { ADD_NEW_POST } from "../../../reducer";
 
 const PostForm = ({ closeModal }) => {
@@ -88,7 +88,6 @@ const PostForm = ({ closeModal }) => {
     setPostFormData((pre) => ({ ...pre, [name]: value }));
   };
   const emojiSelectHandler = (e) => {
-    console.log(e.emoji);
     setPostFormData((pre) => ({
       ...pre,
       content: postFormData.content + e.emoji
@@ -145,13 +144,15 @@ const PostForm = ({ closeModal }) => {
               <button
                 type="button"
                 onClick={() => closeModal()}
-                className={`${styles.cancel_btn}`}
+                className={`${styles.cancel_btn} outline-btn `}
               >
                 cancel
               </button>
               <button
                 disabled={isPostBtnDisable}
-                className={`${styles.btn} ${isPostBtnDisable && "opacity-80"}`}
+                className={`${styles.btn} solid-btn ${
+                  isPostBtnDisable && "opacity-80"
+                }`}
               >
                 {isLoading ? <Loader /> : "Add Post"}
               </button>

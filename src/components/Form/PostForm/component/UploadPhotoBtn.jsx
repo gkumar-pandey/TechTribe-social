@@ -4,8 +4,8 @@ import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternate
 const UploadPhotoBtn = ({ uploadPostImage }) => {
   return (
     <>
-      <label className=" flex items-center cursor-pointer ">
-        <AddPhotoAlternateOutlinedIcon className="text-[color:var(--primary-color)] font-semibold " />
+      <label className="flex items-center cursor-pointer ">
+        <AddPhotoAlternateOutlinedIcon className=" text-[color:var(--primary-light-color)] dark:text-[color:var(--primary-color)] font-semibold " />
         <input
           type="file"
           onChange={uploadPostImage}
