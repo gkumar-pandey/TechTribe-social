@@ -12,7 +12,7 @@
 - [Tech Used](#🛠️-tech-used)
 - [Live Link](#🚀-live-link)
 - [Features](#🧑‍💻-features)
-- [Getting Started]()
+- [Getting Started](#⚛️-getting-started)
 
 ## About
 
