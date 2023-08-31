@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart, AiOutlineShareAlt } from "react-icons/ai";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { FaRegBookmark, FaRegComment } from "react-icons/fa";
-import styles from "../post.module.css";
 import { usePosts } from "../../../context";
 import { useCopyCurrentLink } from "../../../hooks";
-import { toast } from "react-hot-toast";
+import styles from "../post.module.css";
 
 export const LikeIcon = ({
   likesCount,
