@@ -32,7 +32,7 @@
 
 ## 🚀 Live Link
 
-- [TechGiz-E-commerce](https://techgiz-ecommerce.vercel.app/)
+- [TechTribe-social](https://tech-tribe-social.vercel.app/)
 
 ## 🧑‍💻 Features
 
